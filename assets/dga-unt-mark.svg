@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 84" role="img" aria-label="Sistema Integrado DGA UNT">
+  <rect width="320" height="84" rx="16" fill="#0F2E4E"/>
+  <circle cx="42" cy="42" r="24" fill="#F5C242"/>
+  <circle cx="42" cy="42" r="16" fill="#E44345"/>
+  <circle cx="42" cy="42" r="9" fill="#FFFFFF"/>
+  <text x="78" y="34" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">DGA · UNT</text>
+  <text x="78" y="55" font-family="Arial, sans-serif" font-size="12" fill="#D9E4EF">Sistema Integrado</text>
+</svg>

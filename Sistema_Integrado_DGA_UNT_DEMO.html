@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f2e4e" />
+  <meta name="description" content="Maqueta funcional del Sistema Integrado de la Dirección General de Administración de la Universidad Nacional de Trujillo." />
+  <title>Sistema Integrado DGA UNT — Maqueta</title>
+  
+  <style>
+:root{
+  --navy:#0f2e4e;
+  --navy-2:#183f66;
+  --ink:#122033;
+  --muted:#66768a;
+  --line:#dfe7ef;
+  --bg:#f4f7fa;
+  --card:#ffffff;
+  --yellow:#f5c242;
+  --red:#e44345;
+  --green:#0f9276;
+  --teal:#0c8879;
+  --blue:#41699f;
+  --indigo:#5467a8;
+  --cyan:#0f7487;
+  --amber:#e8a91e;
+  --shadow:0 12px 34px rgba(15,46,78,.09);
+  --radius:18px;
+  --sidebar:264px;
+  --assistant:390px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.hidden{display:none!important}
+.app-shell{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#0b2742 0%,#102f50 58%,#0b243d 100%);color:#fff;padding:18px 14px;display:flex;flex-direction:column;z-index:20;box-shadow:8px 0 28px rgba(15,46,78,.08)}
+.brand{display:flex;align-items:center;gap:12px;padding:7px 8px 20px;border-bottom:1px solid rgba(255,255,255,.12)}
+.brand img{width:46px;height:46px;object-fit:cover;object-position:left;border-radius:12px}
+.brand-copy strong{display:block;font-size:13px;line-height:1.3}
+.brand-copy span{display:block;margin-top:3px;color:#b9c9d8;font-size:11px}
+.nav-section{margin-top:18px}
+.nav-label{padding:0 12px 8px;text-transform:uppercase;letter-spacing:.1em;color:#8fa7bb;font-size:10px;font-weight:800}
+.nav-btn{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;color:#d8e2eb;padding:10px 12px;border-radius:11px;text-align:left;margin:2px 0;font-size:13px;transition:.18s ease}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-btn.active{background:#fff;color:var(--navy);font-weight:800;box-shadow:0 7px 20px rgba(0,0,0,.12)}
+.nav-dot{width:9px;height:9px;border-radius:3px;background:currentColor;opacity:.82;flex:none}
+.sidebar-footer{margin-top:auto;padding:12px 8px 4px;color:#a9bac8;font-size:10px;line-height:1.5}
+.main{min-width:0}
+.topbar{height:74px;position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(244,247,250,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(207,219,230,.8)}
+.topbar-left{display:flex;align-items:center;gap:12px;min-width:0}
+.topbar-title{font-size:17px;font-weight:900;letter-spacing:-.02em;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.demo-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#fff3cd;color:#7a5a00;border:1px solid #f3db81;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.role-select{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 34px 9px 11px;color:var(--ink);font-size:12px;max-width:220px}
+.icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:white;color:var(--navy);font-weight:900;display:grid;place-items:center;box-shadow:0 3px 12px rgba(15,46,78,.05)}
+.content{padding:26px 28px 48px;max-width:1620px;margin:0 auto}
+.hero{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:22px}
+.hero h1{margin:0 0 8px;font-size:26px;line-height:1.12;color:var(--navy);letter-spacing:-.035em}
+.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;max-width:780px}
+.hero-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:1px solid var(--line);background:white;color:var(--navy);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:7px;box-shadow:0 4px 12px rgba(15,46,78,.04)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,46,78,.08)}
+.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn.soft{background:#eef4f9}
+.btn.warn{background:#fff5f5;border-color:#ffd0d0;color:#a7282a}
+.grid{display:grid;gap:16px}
+.grid.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid #e5ecf2;border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden}
+.kpi:after{content:"";position:absolute;inset:auto -18px -24px auto;width:85px;height:85px;border-radius:50%;background:linear-gradient(135deg,rgba(245,194,66,.18),rgba(15,46,78,.02))}
+.kpi-label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}
+.kpi-value{font-size:24px;color:var(--navy);font-weight:900;margin-top:8px;letter-spacing:-.03em}
+.kpi-note{font-size:11px;color:#6f8192;margin-top:6px}
+.panel{background:var(--card);border:1px solid #e4ebf1;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;min-width:0}
+.panel-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.panel h2,.panel h3{margin:0;color:var(--navy);letter-spacing:-.02em}
+.panel h2{font-size:16px}.panel h3{font-size:14px}
+.panel-sub{color:var(--muted);font-size:11px;margin-top:3px}
+.two-col{grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr)}
+.three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dashboard-row{grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);margin-bottom:16px}
+.chart-wrap{width:100%;overflow:hidden}
+.svg-chart{width:100%;height:auto;display:block}
+.chart-legend{display:flex;gap:15px;flex-wrap:wrap;margin-top:11px;color:var(--muted);font-size:10px}
+.legend-item{display:flex;align-items:center;gap:6px}.legend-swatch{width:8px;height:8px;border-radius:3px}
+.alert-list{display:flex;flex-direction:column;gap:9px}
+.alert-item{border:1px solid var(--line);border-left:4px solid #a5b7c7;border-radius:12px;padding:10px 11px;background:#fbfcfd}
+.alert-item.high{border-left-color:var(--red)}.alert-item.medium{border-left-color:var(--amber)}.alert-item.low{border-left-color:var(--green)}
+.alert-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.alert-title{font-weight:800;font-size:12px;color:var(--ink)}
+.alert-date{font-size:10px;color:var(--muted)}
+.alert-detail{font-size:11px;color:var(--muted);line-height:1.45;margin-top:4px}
+.unit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.unit-card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;position:relative;overflow:hidden;transition:.18s ease;min-height:160px}
+.unit-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#cdd9e3}
+.unit-accent{height:5px;border-radius:999px;width:48px;margin-bottom:12px;background:var(--navy)}
+.unit-card h3{font-size:14px;margin:0;color:var(--navy)}
+.unit-card p{font-size:11px;color:var(--muted);line-height:1.5;margin:7px 0 13px}
+.unit-stats{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:#52677a}
+.unit-stats strong{font-size:13px;color:var(--ink);margin-right:3px}
+.subarea-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#f7fafc;padding:6px 9px;font-size:10px;color:#44596c}
+.module-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px}
+.norm-panel{position:sticky;top:92px;align-self:start}
+.norm-card{border:1px solid var(--line);border-radius:13px;padding:11px;margin-bottom:9px;background:#fbfcfe}
+.norm-card strong{display:block;font-size:11px;color:var(--navy)}
+.norm-card small{display:block;color:var(--muted);font-size:9px;margin:3px 0 7px}
+.norm-card p{font-size:10px;line-height:1.45;color:#596d7f;margin:0 0 8px}
+.norm-link{font-size:10px;font-weight:800;color:var(--blue);text-decoration:none}
+.norm-link:hover{text-decoration:underline}
+.table-wrap{width:100%;overflow:auto;border:1px solid var(--line);border-radius:13px}
+table{width:100%;border-collapse:collapse;font-size:11px;background:white}
+th{background:#eef3f7;color:#52677a;text-transform:uppercase;letter-spacing:.04em;font-size:9px;text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid #edf1f5;color:#344a5e;vertical-align:middle}
+tr:last-child td{border-bottom:0}tr:hover td{background:#fafcfe}
+.status{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:800;border:1px solid transparent;white-space:nowrap}
+.status.done{background:#eaf8f3;color:#0a725c;border-color:#c9eee2}
+.status.progress{background:#edf4fb;color:#2f5f91;border-color:#d5e6f6}
+.status.pending{background:#fff4df;color:#8c6500;border-color:#f7deb0}
+.status.risk{background:#fff0f0;color:#a5292c;border-color:#ffd1d1}
+.progress{height:7px;background:#e9eef3;border-radius:999px;overflow:hidden;min-width:82px}
+.progress > span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy-2),#5c7faa)}
+.list-compact{display:flex;flex-direction:column;gap:9px}
+.list-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1f5}
+.list-row:last-child{border-bottom:0}
+.list-main{min-width:0}.list-main strong{font-size:11px;color:var(--ink);display:block}.list-main span{font-size:10px;color:var(--muted);display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.metric-bar{display:grid;grid-template-columns:145px minmax(80px,1fr) 42px;gap:9px;align-items:center;margin:10px 0}
+.metric-bar label{font-size:10px;color:#4d6275;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric-bar b{font-size:10px;text-align:right;color:var(--navy)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.filter-input,.filter-select{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:white;color:var(--ink);font-size:11px;min-width:160px}.filter-input{flex:1;min-width:240px}
+.people-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.person-card{border:1px solid var(--line);border-radius:15px;background:white;padding:14px;transition:.18s}.person-card:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.person-head{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--navy),#52769b);color:white;display:grid;place-items:center;font-weight:900;font-size:12px;flex:none}.person-head strong{font-size:12px;color:var(--navy);display:block}.person-head span{font-size:10px;color:var(--muted);display:block;margin-top:2px}.person-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0;font-size:10px;color:#52677a}.person-meta b{color:var(--ink)}
+.teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.teacher-card{border:1px solid var(--line);border-radius:16px;padding:15px;background:white}.teacher-card h3{font-size:13px;color:var(--navy);margin:0}.teacher-card p{font-size:10px;color:var(--muted);line-height:1.45}.teacher-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:11px}.mini-stat{background:#f5f8fb;border-radius:10px;padding:8px;text-align:center}.mini-stat b{display:block;color:var(--navy);font-size:13px}.mini-stat span{font-size:8px;color:var(--muted)}
+.gantt{overflow:auto;border:1px solid var(--line);border-radius:14px}.gantt-row{display:grid;grid-template-columns:240px 105px minmax(520px,1fr);min-width:900px;border-bottom:1px solid #edf1f5;background:white}.gantt-row:last-child{border-bottom:0}.gantt-head{background:#eef3f7;color:#52677a;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.gantt-cell{padding:11px}.gantt-timeline{position:relative;display:grid;grid-template-columns:repeat(6,1fr);align-items:center;background-image:linear-gradient(to right,transparent calc(100% - 1px),#edf1f5 0);background-size:16.666% 100%;min-height:46px}.gantt-bar{height:18px;border-radius:999px;background:linear-gradient(90deg,#315a83,#5f84aa);position:relative;overflow:hidden;box-shadow:0 3px 8px rgba(49,90,131,.18)}.gantt-bar.risk{background:linear-gradient(90deg,#b83a3d,#e56b6e)}.gantt-bar span{position:absolute;left:8px;top:3px;color:#fff;font-size:9px;font-weight:800;white-space:nowrap}
+.report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.report-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:white}.report-card h3{font-size:13px;color:var(--navy);margin:0 0 6px}.report-card p{font-size:10px;color:var(--muted);line-height:1.45;min-height:43px}.report-card .btn{margin-top:6px}
+.dropzone{border:1.5px dashed #bdccd9;border-radius:14px;padding:18px;text-align:center;background:#f9fbfd}.dropzone strong{font-size:11px;color:var(--navy)}.dropzone p{font-size:10px;color:var(--muted);margin:5px 0 10px}.dropzone input{max-width:100%;font-size:10px}
+.doc-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#617589;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:11px;background:white}.field textarea{min-height:95px;resize:vertical}.field.full{grid-column:1/-1}
+.modal-backdrop{position:fixed;inset:0;background:rgba(5,20,34,.42);z-index:80;display:grid;place-items:center;padding:20px}.modal{background:white;width:min(920px,96vw);max-height:88vh;overflow:auto;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25);padding:20px;position:relative}.modal-close{position:absolute;right:14px;top:14px}.profile-grid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px}.profile-aside{background:#f3f7fa;border-radius:16px;padding:16px}.profile-aside h2{font-size:16px;margin:10px 0 5px;color:var(--navy)}.profile-aside p{font-size:10px;color:var(--muted);line-height:1.5}.profile-kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.profile-kv div{background:white;border:1px solid var(--line);border-radius:10px;padding:8px}.profile-kv b{display:block;font-size:11px;color:var(--navy)}.profile-kv span{font-size:8px;color:var(--muted)}
+.assistant-fab{position:fixed;right:22px;bottom:22px;z-index:45;width:54px;height:54px;border-radius:18px;border:0;background:var(--navy);color:#fff;box-shadow:0 12px 30px rgba(15,46,78,.28);font-weight:900;letter-spacing:.04em}
+.assistant-drawer{position:fixed;right:0;top:0;height:100vh;width:min(var(--assistant),95vw);background:#fff;z-index:70;border-left:1px solid var(--line);box-shadow:-18px 0 42px rgba(15,46,78,.14);display:flex;flex-direction:column;transform:translateX(102%);transition:.22s ease}.assistant-drawer.open{transform:translateX(0)}.assistant-head{padding:17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#f8fbfd,#fff)}.assistant-head h3{margin:0;color:var(--navy);font-size:14px}.assistant-head small{color:var(--muted);font-size:9px}.assistant-body{flex:1;overflow:auto;padding:14px;background:#f6f9fb}.bubble{max-width:90%;padding:10px 11px;border-radius:14px;margin:7px 0;font-size:11px;line-height:1.55;white-space:pre-wrap}.bubble.ai{background:#fff;border:1px solid var(--line);color:#344a5e;border-bottom-left-radius:5px}.bubble.user{margin-left:auto;background:var(--navy);color:#fff;border-bottom-right-radius:5px}.assistant-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px;background:#fff}.assistant-chip{border:1px solid var(--line);background:#f7fafc;color:#4b6073;border-radius:999px;padding:6px 8px;font-size:9px}.assistant-form{display:flex;gap:7px;padding:12px 14px 14px;border-top:1px solid var(--line);background:#fff}.assistant-form input{flex:1;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:11px}.assistant-form button{border:0;border-radius:11px;background:var(--navy);color:#fff;padding:0 13px;font-weight:900}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;background:#122f4d;color:#fff;padding:10px 14px;border-radius:12px;z-index:100;font-size:11px;box-shadow:0 12px 28px rgba(0,0,0,.18);transition:.2s}.toast.show{transform:translate(-50%,0);opacity:1}
+.empty{padding:32px;text-align:center;color:var(--muted);font-size:11px}
+.search-highlight{background:#fff2af;padding:0 2px;border-radius:3px}
+@media(max-width:1180px){.grid.kpis{grid-template-columns:repeat(2,1fr)}.unit-grid{grid-template-columns:repeat(2,1fr)}.people-grid{grid-template-columns:repeat(2,1fr)}.module-layout{grid-template-columns:1fr}.norm-panel{position:relative;top:auto}.dashboard-row,.two-col{grid-template-columns:1fr}}
+@media(max-width:860px){:root{--sidebar:78px}.brand-copy,.nav-label,.nav-btn span:not(.nav-dot),.sidebar-footer{display:none}.brand{justify-content:center;padding:7px 0 17px}.brand img{width:45px}.nav-btn{justify-content:center;padding:13px}.topbar{padding:0 15px}.content{padding:20px 15px 40px}.topbar-title{font-size:14px}.demo-pill{display:none}.role-select{max-width:155px}.unit-grid,.people-grid,.teacher-grid,.report-grid{grid-template-columns:1fr}.hero{flex-direction:column}.hero-actions{justify-content:flex-start}.profile-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.grid.kpis{grid-template-columns:1fr}.topbar-actions .icon-btn{display:none}.role-select{max-width:130px}.doc-form{grid-template-columns:1fr}.field.full{grid-column:auto}.content{padding-inline:11px}.panel{padding:14px}.hero h1{font-size:22px}}
+
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgODQiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iU2lzdGVtYSBJbnRlZ3JhZG8gREdBIFVOVCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSI4NCIgcng9IjE2IiBmaWxsPSIjMEYyRTRFIi8+CiAgPGNpcmNsZSBjeD0iNDIiIGN5PSI0MiIgcj0iMjQiIGZpbGw9IiNGNUMyNDIiLz4KICA8Y2lyY2xlIGN4PSI0MiIgY3k9IjQyIiByPSIxNiIgZmlsbD0iI0U0NDM0NSIvPgogIDxjaXJjbGUgY3g9IjQyIiBjeT0iNDIiIHI9IjkiIGZpbGw9IiNGRkZGRkYiLz4KICA8dGV4dCB4PSI3OCIgeT0iMzQiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI0ZGRkZGRiI+REdBIMK3IFVOVDwvdGV4dD4KICA8dGV4dCB4PSI3OCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0Q5RTRFRiI+U2lzdGVtYSBJbnRlZ3JhZG88L3RleHQ+Cjwvc3ZnPgo=" alt="DGA UNT" />
+        <div class="brand-copy">
+          <strong>Sistema Integrado<br>DGA UNT</strong>
+          <span>Maqueta funcional</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Dirección</div>
+        <button class="nav-btn active" data-view="dashboard"><i class="nav-dot"></i><span>Inicio ejecutivo</span></button>
+        <button class="nav-btn" data-view="org"><i class="nav-dot"></i><span>Estructura DGA</span></button>
+        <button class="nav-btn" data-view="projects"><i class="nav-dot"></i><span>Proyectos y Gantt</span></button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Unidades</div>
+        <button class="nav-btn" data-module="rh"><i class="nav-dot"></i><span>Recursos Humanos</span></button>
+        <button class="nav-btn" data-module="abastecimiento"><i class="nav-dot"></i><span>Abastecimiento</span></button>
+        <button class="nav-btn" data-module="tesoreria"><i class="nav-dot"></i><span>Tesorería</span></button>
+        <button class="nav-btn" data-module="contabilidad"><i class="nav-dot"></i><span>Contabilidad</span></button>
+        <button class="nav-btn" data-module="inversiones"><i class="nav-dot"></i><span>Unidad Ejecutora de Inversiones</span></button>
+        <button class="nav-btn" data-module="servicios"><i class="nav-dot"></i><span>Servicios Generales</span></button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Gestión</div>
+        <button class="nav-btn" data-view="people"><i class="nav-dot"></i><span>Servidores y tareas</span></button>
+        <button class="nav-btn" data-view="academic"><i class="nav-dot"></i><span>Personal académico</span></button>
+        <button class="nav-btn" data-view="attendance"><i class="nav-dot"></i><span>Asistencia y permanencia</span></button>
+        <button class="nav-btn" data-view="norms"><i class="nav-dot"></i><span>Normativa vigente</span></button>
+        <button class="nav-btn" data-view="documents"><i class="nav-dot"></i><span>Documentos rápidos</span></button>
+        <button class="nav-btn" data-view="reports"><i class="nav-dot"></i><span>Reportes y Excel</span></button>
+      </div>
+      <div class="sidebar-footer">Demo para presentación institucional.<br>Los datos son ficticios.</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-title">Sistema Integrado de la Dirección General de Administración UNT</div>
+          <div class="demo-pill">● Datos simulados</div>
+        </div>
+        <div class="topbar-actions">
+          <select id="roleSelect" class="role-select" aria-label="Perfil de acceso simulado">
+            <option value="director">Director General de Administración</option>
+            <option value="rh">Jefatura de Recursos Humanos</option>
+            <option value="abastecimiento">Jefatura de Abastecimiento</option>
+            <option value="tesoreria">Jefatura de Tesorería</option>
+            <option value="contabilidad">Jefatura de Contabilidad</option>
+            <option value="inversiones">Jefatura UEI</option>
+            <option value="servicios">Jefatura de Servicios Generales</option>
+            <option value="servidor">Servidor / Mi trabajo</option>
+          </select>
+          <button class="icon-btn" id="openAssistantTop" title="Abrir asistente">IA</button>
+        </div>
+      </header>
+
+      <section id="appContent" class="content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <button class="assistant-fab" id="assistantFab" title="Asistente DGA">IA</button>
+
+  <aside class="assistant-drawer" id="assistantDrawer" aria-label="Asistente DGA">
+    <div class="assistant-head">
+      <div>
+        <h3>Asistente DGA</h3>
+        <small>Modo demostración · respuestas sobre la data ficticia</small>
+      </div>
+      <button class="icon-btn" id="closeAssistant" aria-label="Cerrar">×</button>
+    </div>
+    <div class="assistant-body" id="assistantBody"></div>
+    <div class="assistant-chips">
+      <button class="assistant-chip" data-prompt="¿Qué proyectos están retrasados?">Proyectos retrasados</button>
+      <button class="assistant-chip" data-prompt="¿Quién llegó tarde hoy?">Tardanzas de hoy</button>
+      <button class="assistant-chip" data-prompt="¿Cuál es el saldo de tesorería?">Saldo de Tesorería</button>
+      <button class="assistant-chip" data-prompt="¿Qué alertas normativas hay?">Alertas normativas</button>
+      <button class="assistant-chip" data-prompt="¿Cómo va Gestión del Rendimiento?">GDR 2026</button>
+    </div>
+    <form class="assistant-form" id="assistantForm">
+      <input id="assistantInput" autocomplete="off" placeholder="Pregunta por tareas, personas, proyectos, saldos, normas..." />
+      <button type="submit">Enviar</button>
+    </form>
+  </aside>
+
+  <div id="modalRoot"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+window.DGA_DEMO_DATA = {
+  meta: {
+    title: "Sistema Integrado de la Dirección General de Administración UNT",
+    shortTitle: "Sistema Integrado DGA UNT",
+    version: "Maqueta funcional v0.1",
+    disclaimer: "Todos los nombres, cifras, estados, fechas operativas y montos de esta maqueta son ficticios y se muestran únicamente con fines de demostración.",
+    referenceDate: "11/09/2026"
+  },
+  modules: {
+    dga: {
+      name: "Dirección General de Administración",
+      short: "DGA",
+      accent: "navy",
+      description: "Vista ejecutiva transversal de la gestión administrativa, seguimiento de encargos, documentos, comités, alertas y decisiones.",
+      subareas: ["Despacho DGA", "Gestión documentaria", "Asesoría técnica", "Comités y encargos"],
+      kpis: [
+        ["Expedientes activos", "184", "+12 esta semana"],
+        ["Encargos directivos", "37", "6 críticos"],
+        ["Documentos por firmar", "14", "5 vencen hoy"],
+        ["Alertas transversales", "9", "3 alta prioridad"]
+      ],
+      taskTemplates: [
+        "Revisar expediente administrativo y validar sustento normativo",
+        "Elaborar informe situacional para decisión de la Dirección General",
+        "Proyectar documento administrativo y gestionar su trazabilidad",
+        "Dar seguimiento a acuerdo de comité o encargo institucional"
+      ]
+    },
+    rh: {
+      name: "Unidad de Recursos Humanos",
+      short: "Recursos Humanos",
+      accent: "teal",
+      description: "Gestión integral del SAGRH: empleo, compensación, rendimiento, capacitación, relaciones humanas, SST, escalafón y control de asistencia.",
+      subareas: [
+        "Área de Escalafón", "Área de Personal Académico", "Área de Personal Administrativo",
+        "Área de Remuneraciones y Pensiones", "Subárea de Pensiones",
+        "Área de Capacitación y Gestión del Talento Humano", "Área de Seguridad y Salud en el Trabajo",
+        "Subárea de Control Administrativo", "Subárea de Control Docente",
+        "Secretaría Técnica de Procedimientos Administrativos Disciplinarios", "Gestión del Rendimiento"
+      ],
+      kpis: [
+        ["Servidores UNT", "1,864", "demo institucional"],
+        ["Planillas del mes", "8/9", "88.9% procesado"],
+        ["GDR en seguimiento", "712", "ciclo 2026"],
+        ["Legajos actualizados", "91.4%", "+2.7 pp"]
+      ],
+      taskTemplates: [
+        "Actualizar legajo y registro escalafonario con documentación validada",
+        "Revisar acción de personal y elaborar proyecto de informe o resolución",
+        "Procesar incidencia de asistencia y permanencia del personal",
+        "Actualizar avance de meta y evidencia del ciclo de Gestión del Rendimiento",
+        "Verificar cálculo o incidencia para planilla y aplicativos correspondientes"
+      ]
+    },
+    abastecimiento: {
+      name: "Unidad de Abastecimiento",
+      short: "Abastecimiento",
+      accent: "amber",
+      description: "Programación, contratación, órdenes, almacén, patrimonio y seguimiento de la cadena de abastecimiento público.",
+      subareas: ["Programación y contrataciones", "Área de Almacén General", "Área de Control Patrimonial"],
+      kpis: [
+        ["Requerimientos activos", "126", "23 por priorizar"],
+        ["Órdenes de servicio", "84", "76 notificadas"],
+        ["Órdenes de compra", "41", "35 en ejecución"],
+        ["Bienes patrimoniales", "28,460", "94.7% conciliado"]
+      ],
+      taskTemplates: [
+        "Revisar requerimiento, TDR/especificaciones y disponibilidad para contratación",
+        "Emitir y notificar orden de servicio con condiciones verificadas",
+        "Actualizar Cuadro Multianual de Necesidades y catálogo SIGA",
+        "Registrar recepción, distribución y movimiento de bienes en almacén",
+        "Actualizar estado, ubicación y acto patrimonial de bienes institucionales"
+      ]
+    },
+    tesoreria: {
+      name: "Unidad de Tesorería",
+      short: "Tesorería",
+      accent: "blue",
+      description: "Control de ingresos, pagos, giros, rendiciones, garantías, conciliaciones y posición de caja institucional.",
+      subareas: ["Área de Gestión de Ingresos", "Área de Gestión de Egresos"],
+      kpis: [
+        ["Saldo operativo demo", "S/ 6.42 M", "al 11/09"],
+        ["Pagos programados", "S/ 1.18 M", "próximos 7 días"],
+        ["Ingresos del mes", "S/ 2.36 M", "+8.2% vs ago."],
+        ["Rendiciones pendientes", "27", "7 fuera de plazo"]
+      ],
+      taskTemplates: [
+        "Registrar y conciliar captación de ingresos con SIAF y reportes internos",
+        "Revisar expediente de pago y validar retenciones, detracciones o garantías",
+        "Registrar y verificar giro conforme al cronograma institucional",
+        "Controlar encargos, viáticos y rendiciones pendientes",
+        "Actualizar reporte de caja, ingresos, pagos y saldos"
+      ]
+    },
+    contabilidad: {
+      name: "Unidad de Contabilidad",
+      short: "Contabilidad",
+      accent: "indigo",
+      description: "Registro, control, devengado, conciliación, integración contable y preparación de estados financieros y presupuestales.",
+      subareas: ["Área de Control y Devengado", "Área de Integración Contable"],
+      kpis: [
+        ["Devengados del mes", "S/ 4.87 M", "92.3% revisado"],
+        ["Conciliaciones", "17/20", "85% cerradas"],
+        ["Expedientes observados", "18", "6 críticos"],
+        ["Cierre contable", "78%", "meta 15/09"]
+      ],
+      taskTemplates: [
+        "Revisar expediente de gasto y formalizar devengado con sustento completo",
+        "Conciliar cuenta contable y regularizar diferencias identificadas",
+        "Preparar reporte de ingresos y gastos por centro de costo",
+        "Integrar información contable para estados financieros y presupuestales"
+      ]
+    },
+    inversiones: {
+      name: "Unidad Ejecutora de Inversiones",
+      short: "Inversiones",
+      accent: "cyan",
+      description: "Seguimiento de la fase de ejecución de inversiones, expedientes técnicos, ejecución física-financiera, modificaciones y alertas de plazo.",
+      subareas: ["Cartera de inversiones", "Expedientes técnicos", "Ejecución física y financiera", "Asuntos legales UEI"],
+      kpis: [
+        ["Inversiones activas", "14", "3 con alerta"],
+        ["Monto actualizado", "S/ 48.6 M", "cartera demo"],
+        ["Avance físico", "67.8%", "+4.1 pp mes"],
+        ["Avance financiero", "63.2%", "brecha 4.6 pp"]
+      ],
+      taskTemplates: [
+        "Revisar expediente técnico o documento equivalente de inversión",
+        "Actualizar avance físico y financiero de inversión",
+        "Emitir informe técnico o legal sobre modificación durante ejecución",
+        "Atender observación de control y actualizar documentación de la inversión"
+      ]
+    },
+    servicios: {
+      name: "Unidad de Servicios Generales",
+      short: "Servicios Generales",
+      accent: "red",
+      description: "Operación, mantenimiento y soporte físico institucional: limpieza, áreas verdes, talleres, transportes y requerimientos técnicos.",
+      subareas: ["Área de Limpieza", "Áreas Verdes", "Área de Talleres", "Área de Transportes", "Mantenimiento transversal"],
+      kpis: [
+        ["Órdenes de trabajo", "93", "81 atendidas"],
+        ["Vehículos operativos", "18/21", "85.7%"],
+        ["Incidencias críticas", "5", "2 sin asignar"],
+        ["Cumplimiento semanal", "91.8%", "+3.2 pp"]
+      ],
+      taskTemplates: [
+        "Atender orden de trabajo de mantenimiento y registrar materiales utilizados",
+        "Ejecutar ruta o comisión de servicio y registrar recorrido e incidencias",
+        "Verificar limpieza, orden y condiciones del ambiente asignado",
+        "Ejecutar actividad programada de jardinería y comunicar incidencias",
+        "Realizar inspección técnica y emitir reporte de condición de infraestructura"
+      ]
+    }
+  },
+  sagrhSubsystems: [
+    {
+      name: "Ss1. Planificación de políticas de recursos humanos",
+      processes: ["Estrategia, políticas y procedimientos", "Planificación de recursos humanos"],
+      unt: "URH / jefatura y soporte técnico"
+    },
+    {
+      name: "Ss2. Organización del trabajo y su distribución",
+      processes: ["Diseño de puestos", "Administración de puestos"],
+      unt: "Personal Administrativo, Personal Académico y Escalafón"
+    },
+    {
+      name: "Ss3. Gestión del empleo",
+      processes: ["Selección", "Vinculación", "Inducción", "Periodo de prueba", "Administración de legajos", "Control de asistencia", "Desplazamiento", "Procedimientos disciplinarios", "Desvinculación"],
+      unt: "Personal Administrativo, Personal Académico, Escalafón, Control Administrativo/Docente y STPAD"
+    },
+    {
+      name: "Ss4. Gestión del rendimiento",
+      processes: ["Gestión del rendimiento"],
+      unt: "Gestión del Rendimiento / URH"
+    },
+    {
+      name: "Ss5. Gestión de la compensación",
+      processes: ["Administración de compensaciones", "Administración de pensiones"],
+      unt: "Remuneraciones y Pensiones / Subárea de Pensiones"
+    },
+    {
+      name: "Ss6. Gestión del desarrollo y la capacitación",
+      processes: ["Capacitación", "Progresión en la carrera"],
+      unt: "Capacitación y Gestión del Talento Humano, con áreas de personal según corresponda"
+    },
+    {
+      name: "Ss7. Gestión de relaciones humanas y sociales",
+      processes: ["Relaciones laborales individuales y colectivas", "Seguridad y salud en el trabajo", "Bienestar social", "Cultura y clima organizacional", "Comunicación interna"],
+      unt: "SST y funciones de relaciones humanas/sociales de la URH"
+    }
+  ],
+  norms: [
+    {
+      id: "rof",
+      scope: ["dga","rh","abastecimiento","tesoreria","contabilidad","inversiones","servicios"],
+      title: "ROF de la Universidad Nacional de Trujillo",
+      code: "R.R. N.° 1173-2022/UNT",
+      status: "Base organizacional",
+      summary: "Formaliza la estructura orgánica de la UNT y ubica a la DGA con las unidades de Recursos Humanos, Abastecimiento, Tesorería, Contabilidad, Unidad Ejecutora de Inversiones y Servicios Generales.",
+      url: "https://transparencia.unitru.edu.pe/ROF%20UNT%20/02%20%20ROF%20UNT%20RR%201173-2022.pdf"
+    },
+    {
+      id: "sagrh",
+      scope: ["rh"],
+      title: "Sistema Administrativo de Gestión de Recursos Humanos",
+      code: "Ley N.° 30057 + normativa SERVIR",
+      status: "Vigente / compendio SERVIR",
+      summary: "Marco del servicio civil y de los 7 subsistemas y 23 procesos del SAGRH. La maqueta distribuye la información de RR. HH. por las áreas existentes en la UNT, sin reemplazar su estructura interna.",
+      url: "https://www.gob.pe/institucion/servir/colecciones/9688-procesos-del-sistema-administrativo-de-gestion-de-recursos-humanos-sagrh"
+    },
+    {
+      id: "sst",
+      scope: ["rh"],
+      title: "Ley de Seguridad y Salud en el Trabajo",
+      code: "Ley N.° 29783",
+      status: "Vigente",
+      summary: "Marco general para la gestión preventiva de seguridad y salud en el trabajo, capacitación, investigación de incidentes y obligaciones de prevención.",
+      url: "https://www.gob.pe/institucion/congreso-de-la-republica/normas-legales/462576-29783"
+    },
+    {
+      id: "sna",
+      scope: ["abastecimiento"],
+      title: "Sistema Nacional de Abastecimiento",
+      code: "D. Leg. N.° 1439 + D.S. N.° 217-2019-EF",
+      status: "Vigente",
+      summary: "Regula la Cadena de Abastecimiento Público: programación multianual, gestión de adquisiciones y administración de bienes.",
+      url: "https://www.gob.pe/8362-ministerio-de-economia-y-finanzas-sistema-nacional-de-abastecimiento-sna"
+    },
+    {
+      id: "contrataciones",
+      scope: ["abastecimiento"],
+      title: "Ley General de Contrataciones Públicas",
+      code: "Ley N.° 32069 + D.S. N.° 009-2025-EF",
+      status: "Vigente desde 22/04/2025",
+      summary: "Marco actual de contratación pública. Incluye modificaciones reglamentarias de 2026 y normativa complementaria del OECE.",
+      url: "https://www.gob.pe/institucion/oece/informes-publicaciones/6444155-ley-n-32069-ley-general-de-contrataciones-publicas-y-modificatorias"
+    },
+    {
+      id: "tesoreria",
+      scope: ["tesoreria"],
+      title: "Sistema Nacional de Tesorería",
+      code: "D. Leg. N.° 1441",
+      status: "Vigente",
+      summary: "Marco para la gestión de fondos públicos, percepción, administración y pago de obligaciones del Sector Público.",
+      url: "https://www.gob.pe/institucion/mef/normas-legales/201361-1441"
+    },
+    {
+      id: "contabilidad",
+      scope: ["contabilidad"],
+      title: "Sistema Nacional de Contabilidad",
+      code: "TUO D. Leg. N.° 1438 – D.S. N.° 057-2022-EF",
+      status: "Vigente",
+      summary: "Regula el registro y evaluación contable de hechos económicos, financieros y patrimoniales del Sector Público y la rendición de cuentas.",
+      url: "https://www.mef.gob.pe/es/sistema-nacional-de-contabilidad"
+    },
+    {
+      id: "invierte",
+      scope: ["inversiones"],
+      title: "Sistema Nacional de Programación Multianual y Gestión de Inversiones",
+      code: "D. Leg. N.° 1252 + D.S. N.° 140-2026-EF",
+      status: "Reglamento 2026",
+      summary: "Marco de Invierte.pe para programación, formulación, evaluación y ejecución de inversiones públicas; la maqueta prioriza el seguimiento de la fase de ejecución de la UEI.",
+      url: "https://www.gob.pe/institucion/mef/normas-legales/8402978-140-2026-ef"
+    },
+    {
+      id: "lpag",
+      scope: ["dga","rh","abastecimiento","tesoreria","contabilidad","inversiones","servicios"],
+      title: "TUO de la Ley del Procedimiento Administrativo General",
+      code: "Ley N.° 27444 – D.S. N.° 004-2019-JUS",
+      status: "Marco transversal",
+      summary: "Base transversal para actuaciones administrativas, plazos, notificaciones, validez de actos y debido procedimiento.",
+      url: "https://www.gob.pe/institucion/minjus/normas-legales/279563-004-2019-jus"
+    }
+  ],
+  normativeAlerts: [
+    {date:"18/07/2026", level:"alta", module:"inversiones", title:"Nuevo Reglamento del D. Leg. N.° 1252", detail:"D.S. N.° 140-2026-EF. Revisar matrices y controles del módulo UEI."},
+    {date:"31/07/2026", level:"media", module:"abastecimiento", title:"Actualización de herramienta interpretativa OECE", detail:"Buscador de interpretación normativa actualizado para Ley N.° 32069 y su Reglamento."},
+    {date:"14/01/2026", level:"media", module:"abastecimiento", title:"Modificación reglamentaria de contrataciones", detail:"D.S. N.° 001-2026-EF modifica el Reglamento de la Ley N.° 32069."},
+    {date:"22/09/2025", level:"baja", module:"rh", title:"Compendio normativo actualizado del SAGRH", detail:"SERVIR consolida Ley N.° 30057, reglamentos, 7 subsistemas y 23 procesos."}
+  ],
+  people: [
+    {id:"S001",name:"María Fernanda Torres Vega",unit:"rh",area:"Área de Escalafón",role:"Técnico en Escalafón",regime:"D. Leg. 276",entry:"12/03/2017",salary:"S/ 3,420",gdr:92,status:"Activo",lastActivity:"Actualizó 18 legajos administrativos",tasks:[
+      ["Actualizar legajos administrativos asignados",84,"En curso","13/09/2026"],
+      ["Emitir reportes escalafonarios solicitados",100,"Concluido","11/09/2026"],
+      ["Depurar registros de licencias y movimientos",58,"En curso","18/09/2026"]]},
+    {id:"S002",name:"Luis Alberto Mendoza Ruiz",unit:"rh",area:"Área de Personal Académico",role:"Analista de personal docente",regime:"CAS",entry:"08/08/2021",salary:"S/ 4,300",gdr:88,status:"Activo",lastActivity:"Validó 34 declaraciones de carga académica",tasks:[
+      ["Validar declaraciones de carga académica",73,"En curso","15/09/2026"],
+      ["Revisar incompatibilidades de carga docente",45,"En curso","17/09/2026"],
+      ["Preparar informe de proceso de contratación docente",100,"Concluido","10/09/2026"]]},
+    {id:"S003",name:"Carla Milagros Paredes León",unit:"rh",area:"Área de Personal Administrativo",role:"Asistente de RR. HH.",regime:"CAS",entry:"04/01/2024",salary:"S/ 3,800",gdr:94,status:"Activo",lastActivity:"Registró 7 contratos en matriz de control",tasks:[
+      ["Revisar expedientes de contratación administrativa",80,"En curso","13/09/2026"],
+      ["Actualizar altas y bajas del personal",66,"En curso","14/09/2026"],
+      ["Consolidar incidencias para informe mensual",30,"Pendiente","20/09/2026"]]},
+    {id:"S004",name:"Jorge Eduardo Salazar Nieto",unit:"rh",area:"Área de Remuneraciones y Pensiones",role:"Especialista en planillas",regime:"D. Leg. 276",entry:"17/05/2011",salary:"S/ 5,160",gdr:90,status:"Activo",lastActivity:"Cuadró planilla CAS septiembre",tasks:[
+      ["Procesar planilla CAS septiembre",92,"En curso","12/09/2026"],
+      ["Validar retenciones y aportes",77,"En curso","12/09/2026"],
+      ["Presentar declaración PLAME",20,"Pendiente","18/09/2026"]]},
+    {id:"S005",name:"Rosa Elena Valdivia Castañeda",unit:"rh",area:"Subárea de Pensiones",role:"Técnico administrativo",regime:"D. Leg. 276",entry:"22/10/2014",salary:"S/ 3,590",gdr:89,status:"Activo",lastActivity:"Atendió 6 expedientes de pensionistas",tasks:[
+      ["Actualizar padrón de pensionistas",71,"En curso","19/09/2026"],
+      ["Revisar expedientes de reconocimiento pensionario",50,"En curso","20/09/2026"],
+      ["Preparar reporte de trámites pendientes",100,"Concluido","11/09/2026"]]},
+    {id:"S006",name:"Andrea Lucía Zamora Reyes",unit:"rh",area:"Área de Capacitación y Gestión del Talento Humano",role:"Analista de capacitación",regime:"CAS",entry:"10/02/2023",salary:"S/ 4,100",gdr:95,status:"Activo",lastActivity:"Cerró evaluación de reacción de curso SST",tasks:[
+      ["Actualizar seguimiento del PDP 2026",81,"En curso","14/09/2026"],
+      ["Consolidar evaluación de acciones de capacitación",63,"En curso","16/09/2026"],
+      ["Programar asistencia técnica de octubre",25,"Pendiente","23/09/2026"]]},
+    {id:"S007",name:"Diego Alonso Cabrera Montalvo",unit:"rh",area:"Área de Seguridad y Salud en el Trabajo",role:"Asistente SST",regime:"CAS",entry:"01/06/2022",salary:"S/ 4,250",gdr:93,status:"Activo",lastActivity:"Registró inspección de laboratorio",tasks:[
+      ["Actualizar matriz IPERC de laboratorios",62,"En curso","22/09/2026"],
+      ["Investigar incidente reportado",70,"En curso","13/09/2026"],
+      ["Ejecutar capacitación preventiva",100,"Concluido","09/09/2026"]]},
+    {id:"S008",name:"Paola Jimena Castillo Rojas",unit:"rh",area:"Subárea de Control Administrativo",role:"Técnico de control",regime:"D. Leg. 276",entry:"15/09/2018",salary:"S/ 3,380",gdr:91,status:"Activo",lastActivity:"Procesó incidencias de 9 dependencias",tasks:[
+      ["Procesar incidencias de asistencia 276",88,"En curso","12/09/2026"],
+      ["Supervisar permanencia en dependencias asignadas",60,"En curso","13/09/2026"],
+      ["Actualizar base SACA",76,"En curso","13/09/2026"]]},
+    {id:"S009",name:"Martín Sebastián Rivas Luna",unit:"rh",area:"Subárea de Control Docente",role:"Asistente de control y permanencia",regime:"CAS",entry:"03/03/2025",salary:"S/ 3,550",gdr:87,status:"Activo",lastActivity:"Consolidó marcaciones de 4 facultades",tasks:[
+      ["Consolidar asistencia docente semanal",79,"En curso","12/09/2026"],
+      ["Emitir reporte de inasistencias",52,"En curso","13/09/2026"],
+      ["Verificar horarios observados",35,"Pendiente","16/09/2026"]]},
+    {id:"S010",name:"Elena Patricia Chávez Prado",unit:"rh",area:"Gestión del Rendimiento",role:"Asistente de Gestión del Rendimiento",regime:"CAS",entry:"09/01/2026",salary:"S/ 3,600",gdr:96,status:"Activo",lastActivity:"Validó 21 evidencias de seguimiento",tasks:[
+      ["Revisar evidencias de seguimiento ciclo 2026",74,"En curso","18/09/2026"],
+      ["Actualizar tablero de cobertura GDR",86,"En curso","12/09/2026"],
+      ["Preparar asistencia técnica para evaluadores",40,"Pendiente","16/09/2026"]]},
+
+    {id:"S011",name:"Renato Javier Vásquez Flores",unit:"abastecimiento",area:"Programación y contrataciones",role:"Especialista en logística",regime:"D. Leg. 276",entry:"11/11/2015",salary:"S/ 5,020",gdr:91,status:"Activo",lastActivity:"Actualizó 11 ítems del CMN",tasks:[
+      ["Actualizar modificaciones del CMN",81,"En curso","13/09/2026"],
+      ["Revisar requerimientos priorizados",68,"En curso","14/09/2026"],
+      ["Emitir órdenes de servicio",55,"En curso","12/09/2026"]]},
+    {id:"S012",name:"Ana Paula Medina Salas",unit:"abastecimiento",area:"Programación y contrataciones",role:"Asistente en logística",regime:"CAS",entry:"05/07/2022",salary:"S/ 4,000",gdr:94,status:"Activo",lastActivity:"Coordinó certificación de 6 requerimientos",tasks:[
+      ["Coordinar certificaciones y PCA",90,"En curso","12/09/2026"],
+      ["Registrar rebajas y ampliaciones",62,"En curso","15/09/2026"],
+      ["Controlar expedientes para devengado",35,"Pendiente","18/09/2026"]]},
+    {id:"S013",name:"Óscar Daniel Herrera Ponce",unit:"abastecimiento",area:"Área de Almacén General",role:"Técnico de almacén",regime:"D. Leg. 276",entry:"16/04/2016",salary:"S/ 3,430",gdr:89,status:"Activo",lastActivity:"Despachó 19 PECOSAS",tasks:[
+      ["Registrar ingresos y salidas de bienes",87,"En curso","12/09/2026"],
+      ["Conciliar kardex con inventario físico",60,"En curso","16/09/2026"],
+      ["Preparar despacho de requerimientos",100,"Concluido","11/09/2026"]]},
+    {id:"S014",name:"Mónica Isabel Torres Linares",unit:"abastecimiento",area:"Área de Control Patrimonial",role:"Especialista patrimonial",regime:"D. Leg. 276",entry:"27/08/2013",salary:"S/ 4,880",gdr:92,status:"Activo",lastActivity:"Regularizó ubicación de 27 bienes",tasks:[
+      ["Actualizar ubicación de bienes muebles",78,"En curso","19/09/2026"],
+      ["Preparar expediente de baja patrimonial",50,"En curso","18/09/2026"],
+      ["Conciliar margesí con contabilidad",42,"Pendiente","25/09/2026"]]},
+
+    {id:"S015",name:"Carlos Iván Vega Bustamante",unit:"tesoreria",area:"Área de Gestión de Ingresos",role:"Analista de ingresos",regime:"D. Leg. 276",entry:"18/06/2012",salary:"S/ 4,760",gdr:90,status:"Activo",lastActivity:"Conciliación diaria de ingresos cerrada",tasks:[
+      ["Conciliar ingresos con SIAF",100,"Concluido","11/09/2026"],
+      ["Revisar solicitudes de devolución",64,"En curso","14/09/2026"],
+      ["Actualizar proyección mensual de ingresos",45,"En curso","16/09/2026"]]},
+    {id:"S016",name:"Gabriela Sofía Núñez Correa",unit:"tesoreria",area:"Área de Gestión de Egresos",role:"Técnico de egresos",regime:"CAS",entry:"02/02/2024",salary:"S/ 3,950",gdr:93,status:"Activo",lastActivity:"Validó 23 expedientes de pago",tasks:[
+      ["Revisar expedientes SIAF previos al pago",83,"En curso","12/09/2026"],
+      ["Calcular detracciones y retenciones",75,"En curso","12/09/2026"],
+      ["Controlar rendiciones de viáticos",58,"En curso","17/09/2026"]]},
+    {id:"S017",name:"Víctor Manuel Alcántara Silva",unit:"tesoreria",area:"Área de Gestión de Egresos",role:"Responsable de giros",regime:"D. Leg. 276",entry:"19/01/2010",salary:"S/ 4,990",gdr:88,status:"Activo",lastActivity:"Registró lote de giros del día",tasks:[
+      ["Registrar giros según cronograma",91,"En curso","12/09/2026"],
+      ["Monitorear cartas fianza",70,"En curso","15/09/2026"],
+      ["Atender requerimientos de auditoría",30,"Pendiente","20/09/2026"]]},
+
+    {id:"S018",name:"Lucía Beatriz Villanueva Castro",unit:"contabilidad",area:"Área de Control y Devengado",role:"Analista de devengado",regime:"CAS",entry:"21/03/2022",salary:"S/ 4,200",gdr:94,status:"Activo",lastActivity:"Devengó 17 expedientes sin observación",tasks:[
+      ["Revisar expedientes para devengado",85,"En curso","12/09/2026"],
+      ["Levantar observaciones de gasto",56,"En curso","14/09/2026"],
+      ["Actualizar control de expedientes",93,"En curso","12/09/2026"]]},
+    {id:"S019",name:"Héctor Raúl Espinoza Gálvez",unit:"contabilidad",area:"Área de Integración Contable",role:"Contador",regime:"D. Leg. 276",entry:"14/04/2009",salary:"S/ 5,420",gdr:92,status:"Activo",lastActivity:"Cerró conciliación de 3 cuentas",tasks:[
+      ["Conciliar cuentas contables asignadas",76,"En curso","14/09/2026"],
+      ["Preparar notas contables de regularización",62,"En curso","15/09/2026"],
+      ["Integrar reporte para estados financieros",44,"Pendiente","17/09/2026"]]},
+    {id:"S020",name:"Sonia Maribel Cárdenas Ríos",unit:"contabilidad",area:"Unidad de Contabilidad",role:"Técnico contable",regime:"D. Leg. 276",entry:"30/07/2014",salary:"S/ 3,980",gdr:89,status:"Activo",lastActivity:"Emitió informe de centro de costo",tasks:[
+      ["Elaborar informes de ingresos y gastos",70,"En curso","16/09/2026"],
+      ["Conciliar ingresos RDR",88,"En curso","12/09/2026"],
+      ["Actualizar hoja de costos",40,"Pendiente","21/09/2026"]]},
+
+    {id:"S021",name:"Patricia del Rosario León Ramos",unit:"inversiones",area:"Cartera de inversiones",role:"Especialista de inversiones",regime:"CAS",entry:"13/09/2020",salary:"S/ 6,100",gdr:91,status:"Activo",lastActivity:"Actualizó avance de IOARR Biblioteca",tasks:[
+      ["Actualizar avance físico y financiero",72,"En curso","13/09/2026"],
+      ["Revisar modificación de expediente técnico",54,"En curso","18/09/2026"],
+      ["Preparar informe de riesgo de plazo",90,"En curso","12/09/2026"]]},
+    {id:"S022",name:"Miguel Ángel Peña Aguilar",unit:"inversiones",area:"Asuntos legales UEI",role:"Abogado",regime:"CAS",entry:"05/05/2023",salary:"S/ 5,300",gdr:93,status:"Activo",lastActivity:"Emitió opinión legal de modificación",tasks:[
+      ["Emitir informe legal de ejecución",100,"Concluido","11/09/2026"],
+      ["Preparar proyecto de resolución",60,"En curso","15/09/2026"],
+      ["Atender observación OCI",45,"En curso","18/09/2026"]]},
+
+    {id:"S023",name:"Roberto Enrique Quiroz Vega",unit:"servicios",area:"Área de Talleres",role:"Técnico de mantenimiento",regime:"D. Leg. 276",entry:"09/09/2011",salary:"S/ 3,520",gdr:88,status:"Activo",lastActivity:"Cerró OT de reparación eléctrica",tasks:[
+      ["Atender órdenes de mantenimiento eléctrico",78,"En curso","13/09/2026"],
+      ["Registrar materiales y herramientas",96,"En curso","12/09/2026"],
+      ["Reportar incidencias técnicas",100,"Concluido","11/09/2026"]]},
+    {id:"S024",name:"Natalia Alejandra Cruz Campos",unit:"servicios",area:"Área de Transportes",role:"Asistente administrativa",regime:"CAS",entry:"10/01/2025",salary:"S/ 3,450",gdr:95,status:"Activo",lastActivity:"Actualizó vencimientos de SOAT y revisiones",tasks:[
+      ["Actualizar documentación vehicular",90,"En curso","12/09/2026"],
+      ["Monitorear rutas y comisiones",68,"En curso","13/09/2026"],
+      ["Actualizar control de combustible",55,"En curso","16/09/2026"]]},
+    {id:"S025",name:"Edgar Antonio Morales Zegarra",unit:"servicios",area:"Área de Transportes",role:"Chofer",regime:"D. Leg. 276",entry:"06/03/2013",salary:"S/ 3,260",gdr:90,status:"Activo",lastActivity:"Finalizó comisión Trujillo–Huamachuco",tasks:[
+      ["Ejecutar comisión de servicio programada",100,"Concluido","11/09/2026"],
+      ["Registrar recorrido y consumo",100,"Concluido","11/09/2026"],
+      ["Verificar operatividad del vehículo",80,"En curso","12/09/2026"]]},
+    {id:"S026",name:"Teresa del Pilar Gómez Ríos",unit:"servicios",area:"Área de Limpieza",role:"Personal de limpieza",regime:"D. Leg. 276",entry:"22/02/2016",salary:"S/ 2,780",gdr:93,status:"Activo",lastActivity:"Cierre de ruta Facultad de Ciencias Económicas",tasks:[
+      ["Cumplir ruta de limpieza de ambientes",86,"En curso","12/09/2026"],
+      ["Reportar incidencias de mantenimiento",100,"Concluido","11/09/2026"],
+      ["Controlar insumos asignados",75,"En curso","13/09/2026"]]},
+    {id:"S027",name:"Daniel Augusto Valera Flores",unit:"servicios",area:"Áreas Verdes",role:"Técnico agropecuario",regime:"D. Leg. 276",entry:"04/10/2010",salary:"S/ 3,240",gdr:89,status:"Activo",lastActivity:"Atendió sector Jardín Botánico",tasks:[
+      ["Ejecutar mantenimiento de áreas verdes",82,"En curso","13/09/2026"],
+      ["Verificar herramientas e insumos",90,"En curso","12/09/2026"],
+      ["Reportar necesidad de poda especializada",40,"Pendiente","17/09/2026"]]},
+
+    {id:"S028",name:"Claudia Mercedes Arroyo Silva",unit:"dga",area:"Despacho DGA",role:"Asistente administrativa",regime:"CAS",entry:"15/01/2026",salary:"S/ 3,900",gdr:95,status:"Activo",lastActivity:"Derivó expediente con prioridad alta",tasks:[
+      ["Gestionar documentación del despacho DGA",88,"En curso","12/09/2026"],
+      ["Preparar informe situacional de inventario",60,"En curso","16/09/2026"],
+      ["Actualizar seguimiento de encargos",74,"En curso","13/09/2026"]]},
+    {id:"S029",name:"Fernando José Roldán Tapia",unit:"dga",area:"Asesoría técnica",role:"Especialista de control interno",regime:"D. Leg. 276",entry:"19/08/2015",salary:"S/ 5,600",gdr:92,status:"Activo",lastActivity:"Validó sustento de expediente directivo",tasks:[
+      ["Revisar expedientes administrativos",76,"En curso","14/09/2026"],
+      ["Emitir informe de asesoría técnica",63,"En curso","15/09/2026"],
+      ["Revisar matriz de riesgos operativos",40,"Pendiente","20/09/2026"]]}
+  ],
+  attendance: {
+    today: {onTime: 286, late: 23, absent: 9, leave: 9},
+    monthlyLate: [18,21,16,24,20,17,29,23,19,26,23],
+    latePeople: [
+      ["S023","Roberto Enrique Quiroz Vega","08:11","Área de Talleres"],
+      ["S017","Víctor Manuel Alcántara Silva","08:08","Gestión de Egresos"],
+      ["S009","Martín Sebastián Rivas Luna","08:14","Control Docente"],
+      ["S013","Óscar Daniel Herrera Ponce","08:09","Almacén General"]
+    ]
+  },
+  finance: {
+    months:["Abr","May","Jun","Jul","Ago","Set"],
+    income:[1.72,1.88,1.94,2.10,2.18,2.36],
+    expense:[1.43,1.65,1.71,1.92,2.06,1.84],
+    cashBySource:[
+      ["Recursos directamente recaudados",3.18],
+      ["Recursos ordinarios",2.31],
+      ["Donaciones y transferencias",0.56],
+      ["Otros",0.37]
+    ]
+  },
+  procurement: [
+    ["OS-2026-0841","Servicio de mantenimiento de equipos de laboratorio","S/ 48,600","En ejecución","18/09/2026",72],
+    ["OS-2026-0854","Mantenimiento preventivo de buses institucionales","S/ 31,200","Notificada","25/09/2026",35],
+    ["OC-2026-0412","Materiales eléctricos para talleres","S/ 22,480","Atención parcial","16/09/2026",66],
+    ["OS-2026-0862","Servicio de calibración de instrumentos","S/ 18,900","Por notificar","20/09/2026",18],
+    ["OC-2026-0421","Equipos de protección personal SST","S/ 36,750","En ejecución","22/09/2026",54]
+  ],
+  assets: [
+    ["Computadoras",6240,5940,210,90],
+    ["Mobiliario",10820,9870,710,240],
+    ["Equipos de laboratorio",4870,4280,410,180],
+    ["Vehículos",43,31,9,3],
+    ["Otros bienes",6487,5940,390,157]
+  ],
+  pensions: {total:312,activeCases:26,resolvedMonth:41,avgDays:12.4},
+  training: [
+    ["Gestión del Rendimiento – Seguimiento",128,"11/09/2026","Concluida",4.7],
+    ["SST: prevención de riesgos",86,"09/09/2026","Concluida",4.6],
+    ["Ley N.° 32069 para áreas usuarias",64,"18/09/2026","Programada",null],
+    ["Excel para gestión administrativa",45,"25/09/2026","Programada",null]
+  ],
+  gdr: {scope:712,evidenceSubmitted:498,validated:421,pendingFeedback:96,coverage:69.9},
+  projects: [
+    {id:"P01",name:"Cierre contable agosto 2026",module:"contabilidad",owner:"Héctor Raúl Espinoza Gálvez",start:"02/09",end:"15/09",progress:78,status:"En riesgo",blocker:"Faltan conciliaciones de dos cuentas y respuesta de Tesorería.",tasks:[
+      ["Conciliación de ingresos",100,"Contabilidad"],["Conciliación de saldos",70,"Contabilidad"],["Validación de Tesorería",45,"Tesorería"],["Integración y reporte",62,"Contabilidad"]]},
+    {id:"P02",name:"Planilla institucional septiembre",module:"rh",owner:"Jorge Eduardo Salazar Nieto",start:"05/09",end:"18/09",progress:88,status:"En curso",blocker:"Dos incidencias pendientes de regularización.",tasks:[
+      ["Cierre de incidencias",95,"Control Administrativo"],["Cálculo de planilla",92,"Remuneraciones"],["Validación",82,"URH"],["Registro y declaración",70,"Remuneraciones"]]},
+    {id:"P03",name:"Contratación mantenimiento laboratorios",module:"abastecimiento",owner:"Renato Javier Vásquez Flores",start:"22/08",end:"24/09",progress:61,status:"En riesgo",blocker:"Área usuaria no ha absuelto una observación técnica del requerimiento.",tasks:[
+      ["Requerimiento validado",100,"Área usuaria"],["Disponibilidad",100,"Abastecimiento"],["Actuaciones preparatorias",72,"Abastecimiento"],["Formalización",22,"Abastecimiento"]]},
+    {id:"P04",name:"IOARR renovación de equipamiento Biblioteca",module:"inversiones",owner:"Patricia del Rosario León Ramos",start:"01/07",end:"30/11",progress:64,status:"En curso",blocker:"Sin bloqueo crítico; seguimiento a entrega de componente 2.",tasks:[
+      ["Expediente técnico",100,"UEI"],["Adquisición componente 1",85,"Abastecimiento"],["Adquisición componente 2",48,"Abastecimiento"],["Cierre físico",20,"UEI"]]},
+    {id:"P05",name:"Actualización masiva de legajos",module:"rh",owner:"María Fernanda Torres Vega",start:"15/08",end:"30/10",progress:57,status:"En curso",blocker:"Documentos pendientes de 3 dependencias.",tasks:[
+      ["Inventario",100,"Escalafón"],["Digitalización",63,"Escalafón"],["Validación",48,"Escalafón"],["Carga SGA",32,"Escalafón"]]},
+    {id:"P06",name:"Mantenimiento preventivo de flota",module:"servicios",owner:"Natalia Alejandra Cruz Campos",start:"01/09",end:"28/09",progress:46,status:"En riesgo",blocker:"Tres vehículos esperan repuesto; OS en atención parcial.",tasks:[
+      ["Diagnóstico",100,"Transportes"],["Programación",80,"Transportes"],["Mantenimiento",42,"Proveedor"],["Pruebas y liberación",18,"Transportes"]]}
+  ],
+  faculties: [
+    "Facultad de Ciencias Agropecuarias","Facultad de Ciencias Biológicas","Facultad de Ciencias Económicas",
+    "Facultad de Ciencias Físicas y Matemáticas","Facultad de Ciencias Sociales","Facultad de Derecho y Ciencias Políticas",
+    "Facultad de Educación y Ciencias de la Comunicación","Facultad de Enfermería","Facultad de Estomatología",
+    "Facultad de Farmacia y Bioquímica","Facultad de Ingeniería","Facultad de Ingeniería Química","Facultad de Medicina"
+  ],
+  teachers: [
+    {id:"D001",name:"Alejandro Martín Rojas Peña",faculty:"Facultad de Ciencias Económicas",department:"Departamento Académico de Economía",category:"Asociado TC",lective:12,nonLective:28,courses:["Econometría I","Política Económica"],attendance:96.4,adminRole:"Ninguno",renacyt:"Nivel VII (simulado)",evaluation:4.6},
+    {id:"D002",name:"Verónica Isabel Ponce Salazar",faculty:"Facultad de Ciencias Económicas",department:"Departamento Académico de Administración",category:"Principal DE",lective:10,nonLective:30,courses:["Gestión Estratégica","Seminario de Tesis"],attendance:98.1,adminRole:"Coordinadora de programa (demo)",renacyt:"No registrado (simulado)",evaluation:4.8},
+    {id:"D003",name:"Raúl Fernando Zegarra Torres",faculty:"Facultad de Ingeniería",department:"Departamento Académico de Ingeniería de Sistemas",category:"Asociado TC",lective:14,nonLective:26,courses:["Base de Datos","Ingeniería de Software"],attendance:93.7,adminRole:"Ninguno",renacyt:"Nivel VI (simulado)",evaluation:4.4},
+    {id:"D004",name:"María Elena Uceda Campos",faculty:"Facultad de Medicina",department:"Departamento Académico de Medicina",category:"Principal DE",lective:8,nonLective:32,courses:["Medicina Interna","Seminario Clínico"],attendance:97.2,adminRole:"Jefatura de departamento (demo)",renacyt:"Nivel IV (simulado)",evaluation:4.7},
+    {id:"D005",name:"Sergio Iván López Miranda",faculty:"Facultad de Derecho y Ciencias Políticas",department:"Departamento Académico de Ciencias Jurídicas Públicas y Políticas",category:"Asociado TC",lective:12,nonLective:28,courses:["Derecho Administrativo","Contratación Pública"],attendance:95.0,adminRole:"Ninguno",renacyt:"No registrado (simulado)",evaluation:4.5},
+    {id:"D006",name:"Patricia Yolanda García Núñez",faculty:"Facultad de Educación y Ciencias de la Comunicación",department:"Departamento Académico de Ciencias de la Educación",category:"Principal DE",lective:10,nonLective:30,courses:["Didáctica Universitaria","Evaluación del Aprendizaje"],attendance:98.8,adminRole:"Directora de unidad (demo)",renacyt:"Nivel VII (simulado)",evaluation:4.9},
+    {id:"D007",name:"Enrique Daniel Romero Díaz",faculty:"Facultad de Ingeniería Química",department:"Departamento Académico de Ingeniería Química",category:"Asociado TC",lective:14,nonLective:26,courses:["Operaciones Unitarias","Diseño de Procesos"],attendance:94.5,adminRole:"Ninguno",renacyt:"Nivel V (simulado)",evaluation:4.3},
+    {id:"D008",name:"Claudia Andrea Morales Paredes",faculty:"Facultad de Ciencias Biológicas",department:"Departamento Académico de Microbiología y Parasitología",category:"Auxiliar TC",lective:16,nonLective:24,courses:["Microbiología General","Laboratorio II"],attendance:99.0,adminRole:"Ninguno",renacyt:"Nivel VII (simulado)",evaluation:4.8},
+    {id:"D009",name:"Julio César Mendoza Ávila",faculty:"Facultad de Ciencias Agropecuarias",department:"Departamento Académico de Agronomía y Zootecnia",category:"Asociado TC",lective:12,nonLective:28,courses:["Producción Animal","Gestión Agropecuaria"],attendance:96.9,adminRole:"Ninguno",renacyt:"Nivel VI (simulado)",evaluation:4.6},
+    {id:"D010",name:"Ana Lucía Castro Benites",faculty:"Facultad de Ciencias Físicas y Matemáticas",department:"Departamento Académico de Estadística",category:"Principal DE",lective:10,nonLective:30,courses:["Muestreo","Modelos Estadísticos"],attendance:97.7,adminRole:"Ninguno",renacyt:"Nivel V (simulado)",evaluation:4.7},
+    {id:"D011",name:"Luis Enrique Arce Vega",faculty:"Facultad de Ciencias Sociales",department:"Departamento Académico de Ciencias Sociales",category:"Asociado TC",lective:12,nonLective:28,courses:["Sociología Organizacional","Metodología"],attendance:92.8,adminRole:"Ninguno",renacyt:"No registrado (simulado)",evaluation:4.2},
+    {id:"D012",name:"Mónica Pilar Silva Rojas",faculty:"Facultad de Enfermería",department:"Departamento Académico de Salud del Adulto",category:"Principal DE",lective:10,nonLective:30,courses:["Enfermería del Adulto","Gestión del Cuidado"],attendance:98.4,adminRole:"Coordinadora (demo)",renacyt:"Nivel VI (simulado)",evaluation:4.8},
+    {id:"D013",name:"Ricardo Alonso Carrasco Núñez",faculty:"Facultad de Estomatología",department:"Departamento Académico de Estomatología",category:"Asociado TC",lective:14,nonLective:26,courses:["Clínica Integral","Periodoncia"],attendance:95.8,adminRole:"Ninguno",renacyt:"Nivel VII (simulado)",evaluation:4.5},
+    {id:"D014",name:"Teresa Milagros Ruiz Saldaña",faculty:"Facultad de Farmacia y Bioquímica",department:"Departamento Académico de Farmacología",category:"Principal DE",lective:10,nonLective:30,courses:["Farmacología II","Toxicología"],attendance:97.5,adminRole:"Ninguno",renacyt:"Nivel V (simulado)",evaluation:4.7}
+  ]
+};
+
+</script>
+  <script>
+(() => {
+  const D = window.DGA_DEMO_DATA;
+  const app = document.getElementById('appContent');
+  const roleSelect = document.getElementById('roleSelect');
+  const modalRoot = document.getElementById('modalRoot');
+  const toastEl = document.getElementById('toast');
+  const assistantDrawer = document.getElementById('assistantDrawer');
+  const assistantBody = document.getElementById('assistantBody');
+  const assistantInput = document.getElementById('assistantInput');
+
+  const state = {
+    view: 'dashboard',
+    module: null,
+    role: 'director',
+    peopleFilter: '',
+    faculty: 'all'
+  };
+
+  const access = {
+    director: ['dashboard','org','projects','dga','rh','abastecimiento','tesoreria','contabilidad','inversiones','servicios','people','academic','attendance','norms','documents','reports'],
+    rh: ['dashboard','rh','people','academic','attendance','projects','norms','documents','reports'],
+    abastecimiento: ['dashboard','abastecimiento','projects','norms','documents','reports'],
+    tesoreria: ['dashboard','tesoreria','projects','norms','documents','reports'],
+    contabilidad: ['dashboard','contabilidad','projects','norms','documents','reports'],
+    inversiones: ['dashboard','inversiones','projects','norms','documents','reports'],
+    servicios: ['dashboard','servicios','people','projects','norms','documents','reports'],
+    servidor: ['people','documents','norms','reports']
+  };
+
+  const colors = {
+    navy:'#0f2e4e', blue:'#41699f', teal:'#0f9276', red:'#e44345', amber:'#e8a91e', indigo:'#5467a8', cyan:'#0f7487', gray:'#dbe4eb'
+  };
+
+  const moduleColor = key => ({dga:colors.navy,rh:colors.teal,abastecimiento:colors.amber,tesoreria:colors.blue,contabilidad:colors.indigo,inversiones:colors.cyan,servicios:colors.red}[key] || colors.navy);
+
+  const esc = (v='') => String(v).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+  const initials = name => name.split(/\s+/).slice(0,2).map(x => x[0]).join('').toUpperCase();
+  const statusClass = s => {
+    s = (s || '').toLowerCase();
+    if (s.includes('concl') || s.includes('resuelto') || s.includes('operativo')) return 'done';
+    if (s.includes('riesgo') || s.includes('crít') || s.includes('venc')) return 'risk';
+    if (s.includes('pend') || s.includes('por ')) return 'pending';
+    return 'progress';
+  };
+
+  function showToast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toastEl.classList.remove('show'), 2200);
+  }
+
+  function setActiveNav(){
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      const hitView = btn.dataset.view && btn.dataset.view === state.view;
+      const hitModule = btn.dataset.module && state.view === 'module' && btn.dataset.module === state.module;
+      btn.classList.toggle('active', !!(hitView || hitModule));
+    });
+  }
+
+  function updateNavAccess(){
+    const allowed = access[state.role] || access.director;
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      const key = btn.dataset.module || btn.dataset.view;
+      btn.classList.toggle('hidden', !allowed.includes(key));
+    });
+  }
+
+  function navigate(view, module=null){
+    if (view === 'module' && module) {
+      if (!(access[state.role] || []).includes(module)) {
+        showToast('Ese módulo no está habilitado para el perfil simulado actual.');
+        return;
+      }
+    } else if (!(access[state.role] || []).includes(view)) {
+      if (state.role !== 'director') {
+        showToast('Vista restringida para el perfil simulado actual.');
+        return;
+      }
+    }
+    state.view = view;
+    state.module = module;
+    setActiveNav();
+    render();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function hero(title, subtitle, actions=''){
+    return `<div class="hero"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="hero-actions">${actions}</div></div>`;
+  }
+
+  function kpis(items){
+    return `<div class="grid kpis">${items.map(([label,value,note]) => `<div class="kpi"><div class="kpi-label">${esc(label)}</div><div class="kpi-value">${esc(value)}</div><div class="kpi-note">${esc(note)}</div></div>`).join('')}</div>`;
+  }
+
+  function progress(value){
+    const v = Math.max(0,Math.min(100,Number(value)||0));
+    return `<div class="progress"><span style="width:${v}%"></span></div>`;
+  }
+
+  function barChart(labels, series, opts={}){
+    const width=760, height=260, left=42, top=18, bottom=36, right=18;
+    const plotW=width-left-right, plotH=height-top-bottom;
+    const all = series.flatMap(s => s.values);
+    const max = opts.max || Math.max(...all,1) * 1.12;
+    const groupW = plotW / labels.length;
+    const barW = Math.max(8, Math.min(28, (groupW*0.66)/series.length));
+    let svg = `<svg class="svg-chart" viewBox="0 0 ${width} ${height}" role="img">`;
+    [0,.25,.5,.75,1].forEach(t => {
+      const y=top+plotH-(plotH*t);
+      svg += `<line x1="${left}" x2="${width-right}" y1="${y}" y2="${y}" stroke="#e7edf2" stroke-width="1"/>`;
+      svg += `<text x="${left-8}" y="${y+4}" text-anchor="end" font-size="9" fill="#8292a1">${opts.money?'S/ ':''}${(max*t).toFixed(opts.decimals??1)}</text>`;
+    });
+    labels.forEach((lab,i)=>{
+      const gx=left+i*groupW+groupW/2;
+      series.forEach((s,j)=>{
+        const val=s.values[i]||0;
+        const h=(val/max)*plotH;
+        const x=gx-(series.length*barW)/2+j*barW+2;
+        const y=top+plotH-h;
+        svg += `<rect x="${x}" y="${y}" width="${barW-4}" height="${h}" rx="5" fill="${s.color}" opacity=".92"><title>${esc(lab)}: ${val}</title></rect>`;
+      });
+      svg += `<text x="${gx}" y="${height-12}" text-anchor="middle" font-size="9" fill="#728396">${esc(lab)}</text>`;
+    });
+    svg += `</svg>`;
+    return `<div class="chart-wrap">${svg}</div><div class="chart-legend">${series.map(s=>`<span class="legend-item"><i class="legend-swatch" style="background:${s.color}"></i>${esc(s.name)}</span>`).join('')}</div>`;
+  }
+
+  function donutChart(items){
+    const total = items.reduce((a,b)=>a+b.value,0) || 1;
+    const radius=62, cx=90, cy=88, circ=2*Math.PI*radius;
+    let offset=0;
+    const segs = items.map(i=>{
+      const len=circ*(i.value/total);
+      const out=`<circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="${i.color}" stroke-width="22" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-offset}" transform="rotate(-90 ${cx} ${cy})"/>`;
+      offset += len;
+      return out;
+    }).join('');
+    return `<div style="display:grid;grid-template-columns:180px 1fr;gap:14px;align-items:center">
+      <svg viewBox="0 0 180 176" class="svg-chart"><circle cx="90" cy="88" r="62" fill="none" stroke="#edf2f5" stroke-width="22"/>${segs}<text x="90" y="83" text-anchor="middle" font-size="22" font-weight="900" fill="#0f2e4e">${total}</text><text x="90" y="101" text-anchor="middle" font-size="9" fill="#6d7f90">REGISTROS</text></svg>
+      <div>${items.map(i=>`<div class="list-row"><div class="list-main"><strong>${esc(i.label)}</strong><span>${i.value} · ${Math.round(i.value/total*100)}%</span></div><i class="legend-swatch" style="width:12px;height:12px;background:${i.color}"></i></div>`).join('')}</div>
+    </div>`;
+  }
+
+  function horizontalBars(items, max=null){
+    max = max || Math.max(...items.map(x=>x.value),1);
+    return items.map(x=>`<div class="metric-bar"><label title="${esc(x.label)}">${esc(x.label)}</label><div class="progress"><span style="width:${Math.round(x.value/max*100)}%;background:${x.color||colors.blue}"></span></div><b>${esc(x.display ?? x.value)}</b></div>`).join('');
+  }
+
+  function normCards(scope){
+    const norms = D.norms.filter(n => n.scope.includes(scope) || n.id === 'rof' || n.id === 'lpag');
+    return `<div class="panel norm-panel"><div class="panel-title-row"><div><h3>Marco normativo del módulo</h3><div class="panel-sub">Referencia contextual, no bloque de pantalla principal</div></div></div>
+      ${norms.map(n=>`<div class="norm-card"><strong>${esc(n.title)}</strong><small>${esc(n.code)} · ${esc(n.status)}</small><p>${esc(n.summary)}</p><a class="norm-link" href="${esc(n.url)}" target="_blank" rel="noopener">Abrir fuente oficial ↗</a></div>`).join('')}
+      <div class="norm-card" style="background:#fff9e9;border-color:#f1dfad"><strong>Alerta normativa asistida</strong><small>Diseño de futuro</small><p>En la versión real, el asistente podría advertir cambios normativos vinculados al módulo, siempre con verificación humana y fuente oficial.</p></div>
+    </div>`;
+  }
+
+  function dashboardDataForRole(){
+    if (state.role === 'director') return null;
+    if (D.modules[state.role]) return D.modules[state.role];
+    return null;
+  }
+
+  function renderDashboard(){
+    const scoped = dashboardDataForRole();
+    if (state.role === 'servidor') return renderPeople(true);
+    if (scoped) return renderScopedDashboard(state.role);
+
+    const workload = [
+      {label:'Recursos Humanos',value:86,color:moduleColor('rh')},
+      {label:'Abastecimiento',value:74,color:moduleColor('abastecimiento')},
+      {label:'Tesorería',value:68,color:moduleColor('tesoreria')},
+      {label:'Contabilidad',value:79,color:moduleColor('contabilidad')},
+      {label:'Inversiones',value:61,color:moduleColor('inversiones')},
+      {label:'Servicios Generales',value:91,color:moduleColor('servicios')}
+    ];
+    const alerts = D.normativeAlerts.slice(0,3);
+    app.innerHTML = hero('Panel ejecutivo de la DGA', 'Una vista de supervisión integral para saber qué está ocurriendo hoy, dónde existen retrasos, qué unidades concentran carga y qué decisiones requieren atención.', `<button class="btn primary" data-open-assistant>Consultar al asistente</button><button class="btn" data-export="executive">Descargar resumen Excel</button>`)
+      + kpis([
+        ['Servidores DGA demo','327','visión consolidada'],['Tareas activas','486','58 vencen esta semana'],['Proyectos en riesgo','3','de 6 prioritarios'],['Saldo Tesorería','S/ 6.42 M','dato simulado']
+      ])
+      + `<div class="grid dashboard-row">
+          <div class="panel"><div class="panel-title-row"><div><h2>Ingresos y egresos mensuales</h2><div class="panel-sub">Millones de soles · datos ficticios</div></div><button class="btn" data-module-jump="tesoreria">Ir a Tesorería</button></div>
+            ${barChart(D.finance.months,[{name:'Ingresos',values:D.finance.income,color:colors.teal},{name:'Egresos',values:D.finance.expense,color:colors.blue}],{money:false,decimals:1})}
+          </div>
+          <div class="panel"><div class="panel-title-row"><div><h2>Estado de tareas</h2><div class="panel-sub">Universo demo del día</div></div></div>
+            ${donutChart([{label:'Concluidas',value:182,color:colors.teal},{label:'En curso',value:231,color:colors.blue},{label:'Pendientes',value:58,color:colors.amber},{label:'Críticas',value:15,color:colors.red}])}
+          </div>
+        </div>`
+      + `<div class="grid two-col">
+          <div class="panel"><div class="panel-title-row"><div><h2>Carga operativa por unidad</h2><div class="panel-sub">Índice sintético de demanda de trabajo</div></div><button class="btn" data-view-jump="org">Ver estructura</button></div>${horizontalBars(workload,100)}</div>
+          <div class="panel"><div class="panel-title-row"><div><h2>Radar ejecutivo</h2><div class="panel-sub">Alertas que merecen atención del Director</div></div></div>
+            <div class="alert-list">
+              <div class="alert-item high"><div class="alert-top"><span class="alert-title">Mantenimiento de flota</span><span class="alert-date">46%</span></div><div class="alert-detail">Tres vehículos esperan repuesto. La orden de servicio está en atención parcial.</div></div>
+              <div class="alert-item high"><div class="alert-top"><span class="alert-title">Cierre contable agosto</span><span class="alert-date">78%</span></div><div class="alert-detail">Faltan dos conciliaciones y una validación interdependiente con Tesorería.</div></div>
+              <div class="alert-item medium"><div class="alert-top"><span class="alert-title">Contratación de mantenimiento</span><span class="alert-date">61%</span></div><div class="alert-detail">El área usuaria aún no absuelve una observación técnica del requerimiento.</div></div>
+            </div>
+          </div>
+        </div>`
+      + `<div class="grid two-col" style="margin-top:16px">
+          <div class="panel"><div class="panel-title-row"><div><h2>Actividad de hoy</h2><div class="panel-sub">Muestra de acciones terminadas recientemente</div></div><button class="btn" data-view-jump="people">Ver servidores</button></div>
+            <div class="list-compact">${D.people.slice(0,8).map(p=>`<div class="list-row"><div class="list-main"><strong>${esc(p.name)}</strong><span>${esc(p.lastActivity)} · ${esc(p.area)}</span></div><button class="btn" data-person="${p.id}">Ver</button></div>`).join('')}</div>
+          </div>
+          <div class="panel"><div class="panel-title-row"><div><h2>Alertas normativas</h2><div class="panel-sub">Fuentes oficiales enlazadas en el módulo normativo</div></div><button class="btn" data-view-jump="norms">Ver normativa</button></div>
+            <div class="alert-list">${alerts.map(a=>`<div class="alert-item ${a.level==='alta'?'high':a.level==='media'?'medium':'low'}"><div class="alert-top"><span class="alert-title">${esc(a.title)}</span><span class="alert-date">${esc(a.date)}</span></div><div class="alert-detail">${esc(a.detail)}</div></div>`).join('')}</div>
+          </div>
+        </div>`;
+  }
+
+  function renderScopedDashboard(moduleKey){
+    const m = D.modules[moduleKey];
+    const people = D.people.filter(p=>p.unit===moduleKey);
+    const activeTasks = people.flatMap(p=>p.tasks.map(t=>({person:p.name,task:t[0],progress:t[1],status:t[2],due:t[3]}))).slice(0,10);
+    app.innerHTML = hero(`Panel de ${m.short}`, `Perfil simulado con acceso limitado a ${m.name}. La jefatura visualiza sus indicadores, personal, pendientes y normativa del ámbito.`, `<button class="btn primary" data-module-jump="${moduleKey}">Abrir módulo completo</button><button class="btn" data-open-assistant>Consultar IA</button>`)
+      + kpis(m.kpis)
+      + `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Pendientes del equipo</h2><div class="panel-sub">Tareas asociadas al ámbito del perfil</div></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Servidor</th><th>Tarea</th><th>Avance</th><th>Estado</th><th>Plazo</th></tr></thead><tbody>${activeTasks.map(t=>`<tr><td>${esc(t.person)}</td><td>${esc(t.task)}</td><td>${progress(t.progress)}</td><td><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></td><td>${esc(t.due)}</td></tr>`).join('')}</tbody></table></div>
+        </div>${normCards(moduleKey)}</div>`;
+  }
+
+  function renderOrg(){
+    const order=['rh','abastecimiento','tesoreria','contabilidad','inversiones','servicios'];
+    app.innerHTML = hero('Estructura operativa de la DGA', 'La estructura se presenta como un mapa navegable. El ROF queda como sustento normativo consultable, mientras el espacio principal se utiliza para indicadores, trabajo y alertas.', `<button class="btn" data-export="org">Exportar estructura</button>`)
+      + `<div class="panel" style="margin-bottom:16px"><div class="panel-title-row"><div><h2>Dirección General de Administración</h2><div class="panel-sub">Órgano de apoyo · supervisión ejecutiva transversal</div></div><button class="btn" data-module-jump="dga">Abrir DGA</button></div>
+        <div class="grid kpis" style="margin-bottom:0">${[['Unidades orgánicas','6','según ROF'],['Áreas/subáreas modeladas','20+','según formatos GDR y requerimiento'],['Servidores demo DGA','327','simulado'],['Alertas abiertas','9','simulado']].map(([a,b,c])=>`<div class="kpi"><div class="kpi-label">${a}</div><div class="kpi-value">${b}</div><div class="kpi-note">${c}</div></div>`).join('')}</div>
+      </div>
+      <div class="unit-grid">${order.map(k=>{const m=D.modules[k]; const people=D.people.filter(p=>p.unit===k).length; return `<article class="unit-card"><div class="unit-accent" style="background:${moduleColor(k)}"></div><h3>${esc(m.name)}</h3><p>${esc(m.description)}</p><div class="unit-stats"><span><strong>${m.subareas.length}</strong> componentes</span><span><strong>${people}</strong> personas demo visibles</span></div><div class="subarea-chips">${m.subareas.slice(0,4).map(s=>`<span class="chip">${esc(s)}</span>`).join('')}${m.subareas.length>4?`<span class="chip">+${m.subareas.length-4}</span>`:''}</div><div style="margin-top:13px"><button class="btn primary" data-module-jump="${k}">Ingresar</button></div></article>`}).join('')}</div>`;
+  }
+
+  function renderModule(key){
+    const m=D.modules[key];
+    if (!m) return renderDashboard();
+    const people=D.people.filter(p=>p.unit===key);
+    const project=D.projects.filter(p=>p.module===key);
+    const tasks=people.flatMap(p=>p.tasks.map(t=>({person:p.name,area:p.area,task:t[0],progress:t[1],status:t[2],due:t[3],id:p.id}))).slice(0,12);
+    let special = '';
+    if (key==='rh') special=renderRHSpecial();
+    if (key==='abastecimiento') special=renderProcurementSpecial();
+    if (key==='tesoreria') special=renderTreasurySpecial();
+    if (key==='contabilidad') special=renderAccountingSpecial();
+    if (key==='inversiones') special=renderInvestmentsSpecial();
+    if (key==='servicios') special=renderServicesSpecial();
+    if (key==='dga') special=renderDGASpecial();
+
+    app.innerHTML = hero(m.name, m.description, `<button class="btn primary" data-open-assistant>Preguntar al asistente</button><button class="btn" data-export-module="${key}">Descargar Excel</button>`)
+      + kpis(m.kpis)
+      + `<div class="module-layout"><div>
+          <div class="panel" style="margin-bottom:16px"><div class="panel-title-row"><div><h2>Componentes del módulo</h2><div class="panel-sub">Navegación orientada al trabajo real, no a un bloque normativo sobredimensionado</div></div></div><div class="subarea-chips">${m.subareas.map(s=>`<button class="chip" data-subarea="${esc(s)}">${esc(s)}</button>`).join('')}</div></div>
+          ${special}
+          <div class="panel" style="margin-top:16px"><div class="panel-title-row"><div><h2>Tareas y responsables</h2><div class="panel-sub">Muestra de trabajo ficticio alineado a los formatos GDR entregados</div></div><button class="btn" data-view-jump="people">Buscar persona</button></div>
+            ${tasks.length?`<div class="table-wrap"><table><thead><tr><th>Responsable</th><th>Área</th><th>Tarea / producto</th><th>Avance</th><th>Estado</th><th>Plazo</th></tr></thead><tbody>${tasks.map(t=>`<tr><td><button class="btn" data-person="${t.id}">${esc(t.person)}</button></td><td>${esc(t.area)}</td><td>${esc(t.task)}</td><td>${progress(t.progress)}</td><td><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></td><td>${esc(t.due)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">No hay personas demo asignadas a este módulo.</div>`}
+          </div>
+          <div class="panel" style="margin-top:16px"><div class="panel-title-row"><div><h2>Proyectos / asuntos priorizados</h2><div class="panel-sub">Seguimiento visual de plazos, bloqueos e interdependencias</div></div><button class="btn" data-view-jump="projects">Abrir Gantt</button></div>
+            ${project.length?project.map(p=>`<div class="list-row"><div class="list-main"><strong>${esc(p.name)}</strong><span>${esc(p.blocker)}</span></div><div style="min-width:140px">${progress(p.progress)}<div style="font-size:9px;color:#6f8192;margin-top:4px">${p.progress}% · ${esc(p.status)}</div></div></div>`).join(''):`<div class="empty">Sin proyectos de prioridad alta cargados en esta demo.</div>`}
+          </div>
+        </div>${normCards(key)}</div>`;
+  }
+
+  function renderDGASpecial(){
+    return `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Bandeja del Director</h2><div class="panel-sub">Decisiones, firmas y encargos que requieren intervención</div></div></div>
+      <div class="alert-list"><div class="alert-item high"><div class="alert-top"><span class="alert-title">Informe de cierre contable</span><span class="alert-date">Vence 15/09</span></div><div class="alert-detail">Pendiente de conciliación Tesorería–Contabilidad.</div></div><div class="alert-item medium"><div class="alert-top"><span class="alert-title">Contratación de mantenimiento</span><span class="alert-date">Área usuaria</span></div><div class="alert-detail">Falta absolver observación técnica para continuar.</div></div><div class="alert-item low"><div class="alert-top"><span class="alert-title">Actualización GDR</span><span class="alert-date">69.9%</span></div><div class="alert-detail">Cobertura de evidencias en etapa de seguimiento.</div></div></div>
+      </div><div class="panel"><div class="panel-title-row"><div><h2>Interdependencias</h2><div class="panel-sub">Cuellos de botella identificados por la maqueta</div></div></div>${horizontalBars([{label:'Contabilidad ↔ Tesorería',value:76,display:'2 alertas',color:colors.red},{label:'Abastecimiento ↔ Área usuaria',value:68,display:'1 alerta',color:colors.amber},{label:'UEI ↔ Abastecimiento',value:44,display:'normal',color:colors.cyan},{label:'URH ↔ Facultades',value:59,display:'3 pendientes',color:colors.teal}],100)}</div></div>`;
+  }
+
+  function renderRHSpecial(){
+    const a=D.attendance.today;
+    const sagrh = `<div class="panel" style="margin-bottom:16px"><div class="panel-title-row"><div><h2>Mapa SAGRH: 7 subsistemas y 23 procesos</h2><div class="panel-sub">La maqueta conserva las áreas operativas de la UNT y, a la vez, permite leer su trabajo dentro del marco funcional de SERVIR.</div></div><span class="status progress">Marco transversal</span></div><div class="report-grid">${D.sagrhSubsystems.map((ss,i)=>`<article class="report-card"><div class="kpi-label">SUBSISTEMA ${i+1}</div><h3>${esc(ss.name.replace(/^Ss\d+\.\s*/,''))}</h3><p><b>${ss.processes.length} proceso${ss.processes.length===1?'':'s'}:</b> ${esc(ss.processes.join(' · '))}</p><p style="margin-top:8px"><b>Ámbitos UNT relacionados:</b> ${esc(ss.unt)}</p></article>`).join('')}</div></div>`;
+    return sagrh + `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Control de asistencia de hoy</h2><div class="panel-sub">Lectura ejecutiva de asistencia y permanencia</div></div><button class="btn" data-view-jump="attendance">Abrir control</button></div>${donutChart([{label:'Puntuales',value:a.onTime,color:colors.teal},{label:'Tardanzas',value:a.late,color:colors.amber},{label:'Inasistencias',value:a.absent,color:colors.red},{label:'Licencias',value:a.leave,color:colors.blue}])}</div>
+      <div class="panel"><div class="panel-title-row"><div><h2>Gestión del Rendimiento</h2><div class="panel-sub">Seguimiento del ciclo 2026</div></div></div>${horizontalBars([{label:'Cobertura',value:D.gdr.coverage,display:D.gdr.coverage+'%',color:colors.teal},{label:'Evidencias presentadas',value:D.gdr.evidenceSubmitted/D.gdr.scope*100,display:D.gdr.evidenceSubmitted,color:colors.blue},{label:'Validadas',value:D.gdr.validated/D.gdr.scope*100,display:D.gdr.validated,color:colors.indigo},{label:'Retroalimentación pendiente',value:D.gdr.pendingFeedback/D.gdr.scope*100,display:D.gdr.pendingFeedback,color:colors.amber}],100)}<div style="margin-top:12px"><button class="btn" data-export="gdr">Exportar seguimiento GDR</button></div></div></div>
+      <div class="grid two-col" style="margin-top:16px"><div class="panel"><div class="panel-title-row"><div><h2>Planillas y remuneraciones</h2><div class="panel-sub">Estado simulado del procesamiento mensual</div></div></div>${horizontalBars([{label:'CAS',value:92,display:'92%'},{label:'D. Leg. 276',value:96,display:'96%'},{label:'Pensiones',value:88,display:'88%'},{label:'Complementarias',value:71,display:'71%'}],100)}</div><div class="panel"><div class="panel-title-row"><div><h2>Capacitación</h2><div class="panel-sub">PDP y acciones institucionales</div></div></div><div class="list-compact">${D.training.map(t=>`<div class="list-row"><div class="list-main"><strong>${esc(t[0])}</strong><span>${t[1]} participantes · ${esc(t[2])}</span></div><span class="status ${statusClass(t[3])}">${esc(t[3])}</span></div>`).join('')}</div></div></div>`;
+  }
+
+  function renderProcurementSpecial(){
+    return `<div class="panel"><div class="panel-title-row"><div><h2>Contrataciones y órdenes</h2><div class="panel-sub">Seguimiento de requerimiento → orden → ejecución, sin depender de integración directa en esta maqueta</div></div><button class="btn" data-export="procurement">Excel de órdenes</button></div><div class="table-wrap"><table><thead><tr><th>Orden</th><th>Objeto</th><th>Monto</th><th>Estado</th><th>Fecha objetivo</th><th>Avance</th></tr></thead><tbody>${D.procurement.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td><span class="status ${statusClass(r[3])}">${esc(r[3])}</span></td><td>${esc(r[4])}</td><td>${progress(r[5])}</td></tr>`).join('')}</tbody></table></div></div>
+      <div class="grid two-col" style="margin-top:16px"><div class="panel"><div class="panel-title-row"><div><h2>Patrimonio</h2><div class="panel-sub">Cantidad y condición de bienes · demo</div></div></div>${horizontalBars(D.assets.map(a=>({label:a[0],value:a[1],display:a[1].toLocaleString('es-PE'),color:colors.amber})))}</div><div class="panel"><div class="panel-title-row"><div><h2>Acciones rápidas</h2><div class="panel-sub">Carga de insumos y actualización de seguimiento</div></div></div>${uploadBox('abastecimiento')}<div style="margin-top:12px" class="subarea-chips"><span class="chip">CMN / SIGA</span><span class="chip">Órdenes</span><span class="chip">PECOSAS</span><span class="chip">Patrimonio</span><span class="chip">Expedientes</span></div></div></div>`;
+  }
+
+  function renderTreasurySpecial(){
+    return `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Posición de caja</h2><div class="panel-sub">Saldos ficticios por fuente</div></div><button class="btn" data-export="cash">Excel de saldos</button></div>${horizontalBars(D.finance.cashBySource.map(x=>({label:x[0],value:x[1],display:'S/ '+x[1].toFixed(2)+' M',color:colors.blue})))}</div><div class="panel"><div class="panel-title-row"><div><h2>Rendiciones y pagos</h2><div class="panel-sub">Alertas operativas</div></div></div><div class="alert-list"><div class="alert-item high"><div class="alert-top"><span class="alert-title">7 rendiciones fuera de plazo</span><span class="alert-date">Prioridad alta</span></div><div class="alert-detail">Requieren comunicación y seguimiento para cierre.</div></div><div class="alert-item medium"><div class="alert-top"><span class="alert-title">4 cartas fianza próximas a vencimiento</span><span class="alert-date">≤ 15 días</span></div><div class="alert-detail">Programar validación y acción preventiva.</div></div><div class="alert-item low"><div class="alert-top"><span class="alert-title">Conciliación de ingresos diaria</span><span class="alert-date">Cerrada</span></div><div class="alert-detail">Sin diferencia relevante en la demo.</div></div></div></div></div>`;
+  }
+
+  function renderAccountingSpecial(){
+    return `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Cierre contable</h2><div class="panel-sub">Avance por componente</div></div></div>${horizontalBars([{label:'Devengado',value:92,display:'92%'},{label:'Conciliaciones',value:85,display:'85%'},{label:'Integración',value:74,display:'74%'},{label:'Revisión final',value:48,display:'48%'}],100)}</div><div class="panel"><div class="panel-title-row"><div><h2>Observaciones</h2><div class="panel-sub">Expedientes con necesidad de regularización</div></div></div>${donutChart([{label:'Sin observación',value:124,color:colors.teal},{label:'Subsanable',value:12,color:colors.amber},{label:'Crítica',value:6,color:colors.red}])}</div></div>`;
+  }
+
+  function renderInvestmentsSpecial(){
+    const projects=D.projects.filter(p=>p.module==='inversiones');
+    return `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Cartera priorizada</h2><div class="panel-sub">Fase de ejecución · datos simulados</div></div><button class="btn" data-view-jump="projects">Gantt completo</button></div>${projects.map(p=>`<div class="list-row"><div class="list-main"><strong>${esc(p.name)}</strong><span>${esc(p.start)} → ${esc(p.end)} · ${esc(p.blocker)}</span></div><div style="min-width:150px">${progress(p.progress)}<div style="font-size:9px;color:#6f8192;margin-top:4px">${p.progress}%</div></div></div>`).join('')}</div><div class="panel"><div class="panel-title-row"><div><h2>Semáforo de cartera</h2><div class="panel-sub">14 inversiones activas demo</div></div></div>${donutChart([{label:'En curso normal',value:8,color:colors.teal},{label:'Con alerta',value:3,color:colors.amber},{label:'Críticas',value:2,color:colors.red},{label:'Por cerrar',value:1,color:colors.blue}])}</div></div>`;
+  }
+
+  function renderServicesSpecial(){
+    return `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Órdenes de trabajo</h2><div class="panel-sub">Limpieza, áreas verdes, talleres, transportes y mantenimiento</div></div></div>${horizontalBars([{label:'Limpieza',value:94,display:'94%'},{label:'Áreas verdes',value:89,display:'89%'},{label:'Talleres',value:86,display:'86%'},{label:'Transportes',value:83,display:'83%'},{label:'Mantenimiento',value:91,display:'91%'}],100)}</div><div class="panel"><div class="panel-title-row"><div><h2>Flota institucional</h2><div class="panel-sub">Estado demo de 21 vehículos</div></div></div>${donutChart([{label:'Operativos',value:18,color:colors.teal},{label:'Mantenimiento',value:2,color:colors.amber},{label:'Inoperativo',value:1,color:colors.red}])}</div></div>`;
+  }
+
+  function uploadBox(module){
+    return `<div class="dropzone"><strong>Cargar insumo al módulo</strong><p>Simula la recepción de Excel, PDF o reporte exportado de un aplicativo oficial.</p><input type="file" data-upload-module="${module}" accept=".xlsx,.xls,.csv,.pdf,.doc,.docx" /></div>`;
+  }
+
+  function renderPeople(myWork=false){
+    let people=D.people;
+    if (state.role !== 'director' && state.role !== 'servidor' && D.modules[state.role]) people=people.filter(p=>p.unit===state.role);
+    if (state.role === 'servidor') people=people.filter(p=>p.id==='S010');
+    const title=state.role==='servidor'||myWork?'Mi trabajo y mis pendientes':'Servidores, funciones y tareas';
+    const subtitle=state.role==='servidor'?'Perfil personal simulado: tareas del día, productos, avance y documentos rápidos.':'El Director puede bajar desde el nivel de unidad hasta la persona, revisar qué tiene asignado, qué hizo recientemente, qué está atrasado y su referencia de GDR.';
+    app.innerHTML = hero(title, subtitle, `<button class="btn" data-export="people">Exportar vista</button><button class="btn primary" data-open-assistant>Preguntar por una persona</button>`)
+      + `<div class="panel"><div class="filters"><input id="peopleSearch" class="filter-input" placeholder="Buscar por nombre, área, puesto o régimen..." value="${esc(state.peopleFilter)}"><select id="peopleUnit" class="filter-select"><option value="all">Todas las unidades</option>${Object.entries(D.modules).filter(([k])=>k!=='dga').map(([k,m])=>`<option value="${k}">${esc(m.short)}</option>`).join('')}</select></div><div id="peopleCards" class="people-grid">${peopleCards(people)}</div></div>`;
+  }
+
+  function peopleCards(people){
+    return people.map(p=>`<article class="person-card" data-person-card="${p.id}" data-search="${esc((p.name+' '+p.area+' '+p.role+' '+p.regime).toLowerCase())}" data-unit="${p.unit}"><div class="person-head"><div class="avatar">${initials(p.name)}</div><div><strong>${esc(p.name)}</strong><span>${esc(p.role)}</span></div></div><div class="person-meta"><div><b>${esc(p.area)}</b><br>Ubicación</div><div><b>${p.gdr}/100</b><br>GDR previo demo</div><div><b>${esc(p.regime)}</b><br>Régimen</div><div><b>${p.tasks.filter(t=>t[2]!=='Concluido').length}</b><br>Pendientes</div></div><div class="list-main"><span>Última actividad: ${esc(p.lastActivity)}</span></div><div style="display:flex;gap:7px;margin-top:12px"><button class="btn primary" data-person="${p.id}">Abrir ficha</button><button class="btn" data-export-person="${p.id}">Excel</button></div></article>`).join('');
+  }
+
+  function renderAcademic(){
+    const faculties=['all',...D.faculties];
+    app.innerHTML = hero('Personal académico y carga docente', 'Vista demostrativa integrada al módulo de Personal Académico. Permite revisar carga lectiva/no lectiva, cursos, asistencia, función administrativa temporal y referencia de investigación, siempre con datos ficticios en esta maqueta.', `<button class="btn" data-export="teachers">Exportar docentes demo</button><button class="btn primary" data-open-assistant>Consultar docente</button>`)
+      + `<div class="panel"><div class="filters"><select id="facultySelect" class="filter-select">${faculties.map(f=>`<option value="${esc(f)}" ${state.faculty===f?'selected':''}>${f==='all'?'Todas las facultades':esc(f)}</option>`).join('')}</select><input id="teacherSearch" class="filter-input" placeholder="Buscar docente, departamento, curso..."></div><div id="teacherCards" class="teacher-grid">${teacherCards(D.teachers)}</div></div>`;
+  }
+
+  function teacherCards(teachers){
+    return teachers.map(t=>`<article class="teacher-card" data-faculty="${esc(t.faculty)}" data-teacher-search="${esc((t.name+' '+t.faculty+' '+t.department+' '+t.courses.join(' ')).toLowerCase())}"><div class="person-head"><div class="avatar">${initials(t.name)}</div><div><h3>${esc(t.name)}</h3><span>${esc(t.faculty)}</span></div></div><p>${esc(t.department)} · ${esc(t.category)}<br>Cursos: ${esc(t.courses.join(', '))}<br>Función administrativa: ${esc(t.adminRole)} · Investigación: ${esc(t.renacyt)}</p><div class="teacher-metrics"><div class="mini-stat"><b>${t.lective}h</b><span>Carga lectiva</span></div><div class="mini-stat"><b>${t.nonLective}h</b><span>No lectiva</span></div><div class="mini-stat"><b>${t.attendance}%</b><span>Asistencia</span></div><div class="mini-stat"><b>${t.evaluation}</b><span>Eval. docente</span></div></div><div style="margin-top:11px"><button class="btn" data-teacher="${t.id}">Ver detalle</button></div></article>`).join('');
+  }
+
+  function renderAttendance(){
+    const a=D.attendance.today;
+    app.innerHTML = hero('Asistencia y permanencia', 'Tablero para control administrativo y docente: puntualidad, tardanzas, inasistencias y tendencias. La versión real podría alimentarse de los mecanismos institucionales de control autorizados.', `<button class="btn" data-export="attendance">Descargar Excel</button>`)
+      + kpis([['Puntuales hoy',String(a.onTime),'87.5%'],['Tardanzas',String(a.late),'7.0%'],['Inasistencias',String(a.absent),'2.8%'],['Licencias / permisos',String(a.leave),'2.8%']])
+      + `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Tardanzas por corte reciente</h2><div class="panel-sub">Cantidad de incidencias por día hábil · demo</div></div></div>${barChart(D.attendance.monthlyLate.map((_,i)=>String(i+1)),[{name:'Tardanzas',values:D.attendance.monthlyLate,color:colors.amber}],{decimals:0,max:35})}</div><div class="panel"><div class="panel-title-row"><div><h2>Incidencias de hoy</h2><div class="panel-sub">Muestra de registros ficticios</div></div></div><div class="table-wrap"><table><thead><tr><th>Servidor</th><th>Hora</th><th>Área</th></tr></thead><tbody>${D.attendance.latePeople.map(r=>`<tr><td>${esc(r[1])}</td><td><span class="status pending">${esc(r[2])}</span></td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div></div></div>`;
+  }
+
+  function renderProjects(){
+    app.innerHTML = hero('Proyectos, asuntos y cronogramas', 'Gantt ejecutivo para seguir asuntos con fecha objetivo, dependencias, responsables y cuellos de botella. Aquí no se desarrolla el proyecto de gestión por procesos; se muestran únicamente asuntos operativos simulados.', `<button class="btn" data-export="projects">Exportar cartera</button><button class="btn primary" data-open-assistant>Preguntar por retrasos</button>`)
+      + `<div class="grid kpis">${[['Proyectos priorizados','6','demo'],['En riesgo','3','requieren gestión'],['Promedio avance','65.7%','cartera priorizada'],['Dependencias abiertas','7','entre unidades']].map(x=>`<div class="kpi"><div class="kpi-label">${x[0]}</div><div class="kpi-value">${x[1]}</div><div class="kpi-note">${x[2]}</div></div>`).join('')}</div>`
+      + `<div class="panel"><div class="panel-title-row"><div><h2>Gantt resumido</h2><div class="panel-sub">Ago · Set · Oct · Nov · Dic · Ene</div></div></div><div class="gantt"><div class="gantt-row gantt-head"><div class="gantt-cell">Proyecto</div><div class="gantt-cell">Estado</div><div class="gantt-cell">Cronograma</div></div>${D.projects.map((p,i)=>{const start=[1,1.8,.2,0,1.1,.9][i]; const width=[1.3,1.6,2.1,4.2,2.8,1.7][i]; return `<div class="gantt-row"><div class="gantt-cell"><b style="font-size:11px;color:#0f2e4e">${esc(p.name)}</b><div style="font-size:9px;color:#6f8192;margin-top:4px">${esc(p.owner)} · ${p.progress}%</div></div><div class="gantt-cell"><span class="status ${statusClass(p.status)}">${esc(p.status)}</span></div><div class="gantt-timeline"><button class="gantt-bar ${p.status==='En riesgo'?'risk':''}" data-project="${p.id}" style="grid-column:${Math.max(1,Math.round(start)+1)} / span ${Math.max(1,Math.round(width))};width:${Math.min(98,45+width*12)}%"><span>${p.progress}%</span></button></div></div>`}).join('')}</div></div>
+      <div class="grid two-col" style="margin-top:16px"><div class="panel"><div class="panel-title-row"><div><h2>Cuellos de botella</h2><div class="panel-sub">Explicación sintética para la Dirección</div></div></div><div class="alert-list">${D.projects.filter(p=>p.status==='En riesgo').map(p=>`<div class="alert-item high"><div class="alert-top"><span class="alert-title">${esc(p.name)}</span><span class="alert-date">${p.progress}%</span></div><div class="alert-detail">${esc(p.blocker)}</div></div>`).join('')}</div></div><div class="panel"><div class="panel-title-row"><div><h2>Lectura del asistente</h2><div class="panel-sub">Ejemplo de recomendación ejecutiva</div></div></div><p style="font-size:11px;color:#506579;line-height:1.7;margin:0">Prioridad de intervención: 1) resolver la dependencia Tesorería–Contabilidad para el cierre; 2) requerir al área usuaria absolución de observación técnica en la contratación de mantenimiento; 3) acelerar disponibilidad de repuestos para la flota. En la versión real, cada recomendación debe mostrar la evidencia y el responsable de origen.</p></div></div>`;
+  }
+
+  function renderNorms(){
+    app.innerHTML = hero('Normativa vigente por ámbito', 'Repositorio contextual para que cada unidad vea solo la normativa que le compete. La maqueta incluye enlaces a fuentes oficiales y alertas; en una solución real, la actualización debe validarse jurídicamente antes de afectar reglas de negocio.', `<button class="btn primary" data-open-assistant>Consultar una norma</button>`)
+      + `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Repositorio normativo</h2><div class="panel-sub">Fuentes oficiales priorizadas</div></div></div><div class="list-compact">${D.norms.map(n=>`<div class="list-row"><div class="list-main"><strong>${esc(n.title)}</strong><span>${esc(n.code)} · ${esc(n.status)}</span></div><a class="btn" href="${esc(n.url)}" target="_blank" rel="noopener">Abrir ↗</a></div>`).join('')}</div></div><div class="panel"><div class="panel-title-row"><div><h2>Alertas de actualización</h2><div class="panel-sub">Ejemplos de vigilancia normativa</div></div></div><div class="alert-list">${D.normativeAlerts.map(a=>`<div class="alert-item ${a.level==='alta'?'high':a.level==='media'?'medium':'low'}"><div class="alert-top"><span class="alert-title">${esc(a.title)}</span><span class="alert-date">${esc(a.date)}</span></div><div class="alert-detail">${esc(a.detail)}</div></div>`).join('')}</div></div></div>`;
+  }
+
+  function renderDocuments(){
+    const unitOptions=Object.entries(D.modules).map(([k,m])=>`<option value="${k}">${esc(m.name)}</option>`).join('');
+    app.innerHTML = hero('Documentos y formatos rápidos', 'Espacio de trabajo para generar borradores simples a partir de la información ya registrada. En la demo se producen archivos .doc compatibles con Word y formatos de seguimiento sin necesidad de salir del sistema.', '')
+      + `<div class="grid two-col"><div class="panel"><div class="panel-title-row"><div><h2>Generador de documento</h2><div class="panel-sub">Borrador demostrativo editable antes de descargar</div></div></div><div class="doc-form"><div class="field"><label>Tipo</label><select id="docType"><option>Informe breve</option><option>Proveído</option><option>Memorando</option><option>Oficio interno</option><option>Formato de seguimiento GDR</option></select></div><div class="field"><label>Unidad</label><select id="docUnit">${unitOptions}</select></div><div class="field"><label>Responsable</label><input id="docOwner" value="Responsable ficticio"></div><div class="field"><label>Asunto</label><input id="docSubject" value="Seguimiento de actividad administrativa"></div><div class="field full"><label>Contenido / indicación</label><textarea id="docBody">Se informa el estado de avance de la actividad asignada, los productos desarrollados, los pendientes identificados y las acciones previstas para su atención.</textarea></div><div class="field full"><button class="btn primary" id="generateDoc">Generar y descargar Word</button></div></div></div><div class="panel"><div class="panel-title-row"><div><h2>Formatos de trabajo</h2><div class="panel-sub">Accesos rápidos simulados</div></div></div><div class="report-grid" style="grid-template-columns:1fr"><div class="report-card"><h3>Presentación de evidencias GDR</h3><p>Formato simplificado para registrar indicador, avance, observaciones y evidencias.</p><button class="btn" data-doc-template="gdr">Descargar Word</button></div><div class="report-card"><h3>Reporte de pendientes del servidor</h3><p>Resumen de tareas, avance, plazo y observaciones a partir de la ficha personal.</p><button class="btn" data-doc-template="tasks">Descargar Word</button></div><div class="report-card"><h3>Proveído rápido</h3><p>Borrador breve con asunto, destino, indicación y fecha.</p><button class="btn" data-doc-template="proveido">Descargar Word</button></div></div></div></div>`;
+  }
+
+  function renderReports(){
+    app.innerHTML = hero('Reportes y exportación', 'Centro de descarga para extraer información priorizada. La maqueta genera archivos .xls compatibles con Excel directamente en el navegador, sin servidor.', '')
+      + `<div class="report-grid"><div class="report-card"><h3>Resumen ejecutivo DGA</h3><p>Indicadores, alertas y proyectos priorizados para la Dirección General.</p><button class="btn primary" data-export="executive">Descargar Excel</button></div><div class="report-card"><h3>Servidores y tareas</h3><p>Persona, unidad, área, régimen, GDR y pendientes.</p><button class="btn" data-export="people">Descargar Excel</button></div><div class="report-card"><h3>Asistencia</h3><p>Puntualidad, tardanzas, inasistencias y detalle demo de incidencias.</p><button class="btn" data-export="attendance">Descargar Excel</button></div><div class="report-card"><h3>Contrataciones</h3><p>Órdenes de compra/servicio, montos, estado y fecha objetivo.</p><button class="btn" data-export="procurement">Descargar Excel</button></div><div class="report-card"><h3>Cartera de proyectos</h3><p>Proyecto, responsable, avance, estado, fechas y bloqueo.</p><button class="btn" data-export="projects">Descargar Excel</button></div><div class="report-card"><h3>Docentes demo</h3><p>Facultad, departamento, carga lectiva/no lectiva, asistencia y evaluación.</p><button class="btn" data-export="teachers">Descargar Excel</button></div></div>
+      <div class="panel" style="margin-top:16px"><div class="panel-title-row"><div><h2>Importación demostrativa</h2><div class="panel-sub">La solución real podría consumir APIs autorizadas o cargar reportes exportados de sistemas oficiales cuando no exista integración directa.</div></div></div>${uploadBox('general')}</div>`;
+  }
+
+  function render(){
+    updateNavAccess();
+    setActiveNav();
+    switch(state.view){
+      case 'dashboard': renderDashboard(); break;
+      case 'org': renderOrg(); break;
+      case 'module': renderModule(state.module); break;
+      case 'people': renderPeople(); break;
+      case 'academic': renderAcademic(); break;
+      case 'attendance': renderAttendance(); break;
+      case 'projects': renderProjects(); break;
+      case 'norms': renderNorms(); break;
+      case 'documents': renderDocuments(); break;
+      case 'reports': renderReports(); break;
+      default: renderDashboard();
+    }
+  }
+
+  function openPerson(id){
+    const p=D.people.find(x=>x.id===id); if(!p) return;
+    modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><div class="modal" onclick="event.stopPropagation()"><button class="icon-btn modal-close" data-close-modal>×</button><div class="profile-grid"><aside class="profile-aside"><div class="avatar" style="width:56px;height:56px;font-size:16px">${initials(p.name)}</div><h2>${esc(p.name)}</h2><p>${esc(p.role)}<br>${esc(p.area)}<br>${esc(D.modules[p.unit]?.name||p.unit)}</p><div class="profile-kv"><div><b>${esc(p.regime)}</b><span>Régimen</span></div><div><b>${esc(p.entry)}</b><span>Ingreso</span></div><div><b>${esc(p.salary)}</b><span>Remuneración demo</span></div><div><b>${p.gdr}/100</b><span>GDR demo</span></div></div><div style="margin-top:12px"><button class="btn" data-export-person="${p.id}">Descargar Excel</button></div></aside><section><div class="panel-title-row"><div><h2>Tareas y productos</h2><div class="panel-sub">Última actividad: ${esc(p.lastActivity)}</div></div></div><div class="table-wrap"><table><thead><tr><th>Tarea / producto</th><th>Avance</th><th>Estado</th><th>Plazo</th></tr></thead><tbody>${p.tasks.map(t=>`<tr><td>${esc(t[0])}</td><td>${progress(t[1])}<div style="font-size:9px;margin-top:4px">${t[1]}%</div></td><td><span class="status ${statusClass(t[2])}">${esc(t[2])}</span></td><td>${esc(t[3])}</td></tr>`).join('')}</tbody></table></div><div class="panel" style="margin-top:14px;box-shadow:none;background:#f8fafc"><h3>Lectura ejecutiva</h3><p style="font-size:11px;line-height:1.65;color:#586d80">El servidor mantiene ${p.tasks.filter(t=>t[2]!=='Concluido').length} tareas activas. La prioridad recomendada es atender la actividad con menor avance y plazo más próximo. Esta lectura es simulada; en la versión real se calcularía con reglas configurables y evidencias trazables.</p></div></section></div></div></div>`;
+  }
+
+  function openTeacher(id){
+    const t=D.teachers.find(x=>x.id===id); if(!t) return;
+    modalRoot.innerHTML=`<div class="modal-backdrop" data-close-modal><div class="modal" onclick="event.stopPropagation()"><button class="icon-btn modal-close" data-close-modal>×</button><div class="profile-grid"><aside class="profile-aside"><div class="avatar" style="width:56px;height:56px;font-size:16px">${initials(t.name)}</div><h2>${esc(t.name)}</h2><p>${esc(t.faculty)}<br>${esc(t.department)}<br>${esc(t.category)}</p><div class="profile-kv"><div><b>${t.lective} h</b><span>Lectiva</span></div><div><b>${t.nonLective} h</b><span>No lectiva</span></div><div><b>${t.attendance}%</b><span>Asistencia</span></div><div><b>${t.evaluation}</b><span>Evaluación</span></div></div></aside><section><h2 style="color:#0f2e4e">Información académica simulada</h2><div class="table-wrap"><table><tbody><tr><th>Cursos</th><td>${esc(t.courses.join(', '))}</td></tr><tr><th>Función administrativa</th><td>${esc(t.adminRole)}</td></tr><tr><th>Referencia CONCYTEC/RENACYT</th><td>${esc(t.renacyt)}</td></tr><tr><th>Control de asistencia</th><td>${t.attendance}% de registros conformes en el periodo demo</td></tr></tbody></table></div><div class="panel" style="margin-top:14px;box-shadow:none;background:#f8fafc"><h3>Uso esperado</h3><p style="font-size:11px;color:#596e80;line-height:1.6">La interfaz permitiría al Área de Personal Académico cargar o sincronizar información autorizada de carga docente y contrastarla con asistencia, acciones administrativas y expedientes de personal. Los conectores concretos se definirían recién en el proyecto real.</p></div></section></div></div></div>`;
+  }
+
+  function openProject(id){
+    const p=D.projects.find(x=>x.id===id); if(!p) return;
+    modalRoot.innerHTML=`<div class="modal-backdrop" data-close-modal><div class="modal" onclick="event.stopPropagation()"><button class="icon-btn modal-close" data-close-modal>×</button><h2 style="margin:0;color:#0f2e4e">${esc(p.name)}</h2><p style="font-size:11px;color:#66788a">${esc(p.owner)} · ${esc(p.start)} → ${esc(p.end)} · ${p.progress}%</p><div class="alert-item ${p.status==='En riesgo'?'high':'low'}" style="margin:14px 0"><div class="alert-top"><span class="alert-title">${esc(p.status)}</span><span class="alert-date">${p.progress}%</span></div><div class="alert-detail">${esc(p.blocker)}</div></div><div class="table-wrap"><table><thead><tr><th>Actividad</th><th>Avance</th><th>Responsable / dependencia</th></tr></thead><tbody>${p.tasks.map(t=>`<tr><td>${esc(t[0])}</td><td>${progress(t[1])}<div style="font-size:9px;margin-top:4px">${t[1]}%</div></td><td>${esc(t[2])}</td></tr>`).join('')}</tbody></table></div></div></div>`;
+  }
+
+  function assistantOpen(){assistantDrawer.classList.add('open'); assistantInput.focus();}
+  function assistantClose(){assistantDrawer.classList.remove('open');}
+  function addBubble(text,who='ai'){
+    const d=document.createElement('div'); d.className=`bubble ${who}`; d.textContent=text; assistantBody.appendChild(d); assistantBody.scrollTop=assistantBody.scrollHeight;
+  }
+
+  function assistantReply(q){
+    const s=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const findPerson=D.people.find(p=>s.includes(p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').split(' ').slice(0,2).join(' '))) || D.people.find(p=>p.name.toLowerCase().split(' ').some(x=>x.length>5 && s.includes(x.toLowerCase())));
+    const findTeacher=D.teachers.find(t=>t.name.toLowerCase().split(' ').some(x=>x.length>6 && s.includes(x.toLowerCase())));
+    if(findPerson && (s.includes('tarea')||s.includes('pend')||s.includes('hizo')||s.includes('trabaj'))){
+      const pending=findPerson.tasks.filter(t=>t[2]!=='Concluido');
+      return `${findPerson.name} — ${findPerson.area}\nÚltima actividad: ${findPerson.lastActivity}.\nPendientes: ${pending.map(t=>`${t[0]} (${t[1]}%, plazo ${t[3]})`).join('; ')}.\nGDR demo previo: ${findPerson.gdr}/100.`;
+    }
+    if(findTeacher || s.includes('carga academica') || s.includes('docente')){
+      const t=findTeacher || D.teachers[0];
+      return `${t.name} (${t.faculty}) tiene una carga demo de ${t.lective} h lectivas y ${t.nonLective} h no lectivas. Cursos: ${t.courses.join(', ')}. Asistencia: ${t.attendance}%. Función administrativa: ${t.adminRole}. Referencia RENACYT: ${t.renacyt}.`;
+    }
+    if(s.includes('retras')||s.includes('riesgo')||s.includes('cronograma')||s.includes('proyecto')){
+      const risk=D.projects.filter(p=>p.status==='En riesgo');
+      return `Hay ${risk.length} asuntos en riesgo: ${risk.map(p=>`${p.name} (${p.progress}%): ${p.blocker}`).join(' | ')}`;
+    }
+    if(s.includes('tarde')||s.includes('tardanza')||s.includes('asistencia')){
+      return `Hoy la demo registra ${D.attendance.today.onTime} puntuales, ${D.attendance.today.late} tardanzas, ${D.attendance.today.absent} inasistencias y ${D.attendance.today.leave} licencias/permisos. Ejemplos de tardanzas: ${D.attendance.latePeople.map(x=>`${x[1]} ${x[2]}`).join(', ')}.`;
+    }
+    if(s.includes('saldo')||s.includes('tesorer')||s.includes('caja')){
+      return `Saldo operativo demo de Tesorería: S/ 6.42 millones. Ingresos de septiembre: S/ 2.36 M. Pagos programados próximos 7 días: S/ 1.18 M. Hay 27 rendiciones pendientes, 7 fuera de plazo.`;
+    }
+    if(s.includes('norma')||s.includes('normativ')||s.includes('actualiz')){
+      return `Alertas normativas demo: 1) D.S. N.° 140-2026-EF, nuevo Reglamento de Invierte.pe; 2) actualización interpretativa OECE del 31/07/2026; 3) D.S. N.° 001-2026-EF sobre el Reglamento de la Ley N.° 32069. Abre “Normativa vigente” para ir a la fuente oficial.`;
+    }
+    if(s.includes('gdr')||s.includes('rendimiento')){
+      return `Gestión del Rendimiento 2026 (demo): alcance 712 servidores; 498 evidencias presentadas; 421 validadas; 96 retroalimentaciones pendientes; cobertura mostrada 69.9%.`;
+    }
+    if(s.includes('pension')){
+      return `Subárea de Pensiones (demo): ${D.pensions.total} pensionistas registrados, ${D.pensions.activeCases} trámites activos, ${D.pensions.resolvedMonth} resueltos en el mes y tiempo medio de ${D.pensions.avgDays} días.`;
+    }
+    if(s.includes('bien')||s.includes('patrimon')){
+      const total=D.assets.reduce((a,b)=>a+b[1],0);
+      return `Control patrimonial demo: ${total.toLocaleString('es-PE')} bienes en categorías principales. La vista de Abastecimiento permite revisar cantidades, condición, ubicación y acciones patrimoniales.`;
+    }
+    if(s.includes('orden')||s.includes('contrat')){
+      const pending=D.procurement.filter(r=>r[3]!=='En ejecución').length;
+      return `La demo tiene ${D.procurement.length} órdenes priorizadas visibles; ${pending} requieren actuación previa o atención parcial. La contratación de mantenimiento de laboratorios está en 61% y tiene una observación pendiente del área usuaria.`;
+    }
+    return `Puedo responder en esta maqueta sobre: tareas y pendientes de servidores demo, proyectos retrasados, asistencia, saldos de Tesorería, órdenes de Abastecimiento, Gestión del Rendimiento, patrimonio, pensiones, docentes demo y alertas normativas. Prueba, por ejemplo: “¿qué tareas tiene María Fernanda Torres Vega?”`;
+  }
+
+  function exportXls(filename, rows){
+    if(!rows || !rows.length){showToast('No hay datos para exportar.'); return;}
+    const headers=Object.keys(rows[0]);
+    const xmlEsc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const rowXml = arr => `<Row>${arr.map(v=>`<Cell><Data ss:Type="String">${xmlEsc(v)}</Data></Cell>`).join('')}</Row>`;
+    const xml=`<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="Header"><Font ss:Bold="1"/><Interior ss:Color="#DCE6F1" ss:Pattern="Solid"/></Style></Styles><Worksheet ss:Name="Reporte"><Table><Row>${headers.map(h=>`<Cell ss:StyleID="Header"><Data ss:Type="String">${xmlEsc(h)}</Data></Cell>`).join('')}</Row>${rows.map(r=>rowXml(headers.map(h=>r[h]))).join('')}</Table></Worksheet></Workbook>`;
+    downloadBlob(filename.endsWith('.xls')?filename:filename+'.xls', new Blob([xml],{type:'application/vnd.ms-excel;charset=utf-8'}));
+  }
+
+  function downloadDoc(filename, title, bodyHtml){
+    const html=`<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.5;color:#111}h1{font-size:16pt;text-align:center}h2{font-size:12pt}table{width:100%;border-collapse:collapse}td,th{border:1px solid #999;padding:6px}th{background:#eee}</style></head><body><h1>${esc(title)}</h1>${bodyHtml}</body></html>`;
+    downloadBlob(filename.endsWith('.doc')?filename:filename+'.doc', new Blob([html],{type:'application/msword;charset=utf-8'}));
+  }
+  function downloadBlob(name, blob){const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},800); showToast(`Descarga generada: ${name}`);}
+
+  function rowsForExport(type, moduleKey=null){
+    if(type==='people') return D.people.map(p=>({ID:p.id,Servidor:p.name,Unidad:D.modules[p.unit]?.name||p.unit,Área:p.area,Puesto:p.role,Régimen:p.regime,Ingreso:p.entry,Remuneración_demo:p.salary,GDR_demo:p.gdr,Última_actividad:p.lastActivity,Pendientes:p.tasks.filter(t=>t[2]!=='Concluido').length}));
+    if(type==='teachers') return D.teachers.map(t=>({ID:t.id,Docente:t.name,Facultad:t.faculty,Departamento:t.department,Categoría:t.category,Carga_lectiva:t.lective,Carga_no_lectiva:t.nonLective,Cursos:t.courses.join('; '),Asistencia:t.attendance,Función_administrativa:t.adminRole,RENACYT_demo:t.renacyt,Evaluación_docente_demo:t.evaluation}));
+    if(type==='projects') return D.projects.map(p=>({ID:p.id,Proyecto:p.name,Módulo:D.modules[p.module]?.name||p.module,Responsable:p.owner,Inicio:p.start,Fin:p.end,Avance:p.progress,Estado:p.status,Bloqueo:p.blocker}));
+    if(type==='attendance') return D.attendance.latePeople.map(x=>({ID:x[0],Servidor:x[1],Hora:x[2],Área:x[3],Incidencia:'Tardanza demo'}));
+    if(type==='procurement') return D.procurement.map(r=>({Orden:r[0],Objeto:r[1],Monto:r[2],Estado:r[3],Fecha_objetivo:r[4],Avance:r[5]+'%'}));
+    if(type==='cash') return D.finance.cashBySource.map(x=>({Fuente:x[0],Saldo_demo_millones:x[1]}));
+    if(type==='gdr') return [{Indicador:'Alcance',Valor:D.gdr.scope},{Indicador:'Evidencias presentadas',Valor:D.gdr.evidenceSubmitted},{Indicador:'Evidencias validadas',Valor:D.gdr.validated},{Indicador:'Retroalimentación pendiente',Valor:D.gdr.pendingFeedback},{Indicador:'Cobertura demo',Valor:D.gdr.coverage+'%'}];
+    if(type==='org') return Object.entries(D.modules).filter(([k])=>k!=='dga').map(([k,m])=>({Unidad:m.name,Componentes:m.subareas.join('; '),Personas_demo_visibles:D.people.filter(p=>p.unit===k).length}));
+    if(type==='executive') return [{Indicador:'Servidores DGA demo',Valor:'327'},{Indicador:'Tareas activas',Valor:'486'},{Indicador:'Proyectos en riesgo',Valor:'3'},{Indicador:'Saldo Tesorería demo',Valor:'S/ 6.42 M'},{Indicador:'Cobertura GDR demo',Valor:D.gdr.coverage+'%'}];
+    if(type==='module' && moduleKey){
+      return D.people.filter(p=>p.unit===moduleKey).flatMap(p=>p.tasks.map(t=>({Servidor:p.name,Área:p.area,Tarea:t[0],Avance:t[1]+'%',Estado:t[2],Plazo:t[3]})));
+    }
+    return [];
+  }
+
+  function applyPeopleFilter(){
+    const q=(document.getElementById('peopleSearch')?.value||'').toLowerCase();
+    const unit=document.getElementById('peopleUnit')?.value||'all';
+    document.querySelectorAll('[data-person-card]').forEach(card=>{
+      const okQ=!q || card.dataset.search.includes(q);
+      const okU=unit==='all' || card.dataset.unit===unit;
+      card.classList.toggle('hidden', !(okQ&&okU));
+    });
+  }
+
+  function applyTeacherFilter(){
+    const q=(document.getElementById('teacherSearch')?.value||'').toLowerCase();
+    const fac=document.getElementById('facultySelect')?.value||'all';
+    document.querySelectorAll('[data-teacher-search]').forEach(card=>{
+      const okQ=!q||card.dataset.teacherSearch.includes(q);
+      const okF=fac==='all'||card.dataset.faculty===fac;
+      card.classList.toggle('hidden',!(okQ&&okF));
+    });
+  }
+
+  document.addEventListener('click', e=>{
+    const nav=e.target.closest('.nav-btn');
+    if(nav){if(nav.dataset.module) navigate('module',nav.dataset.module); else navigate(nav.dataset.view); return;}
+    const moduleJump=e.target.closest('[data-module-jump]'); if(moduleJump){navigate('module',moduleJump.dataset.moduleJump);return;}
+    const viewJump=e.target.closest('[data-view-jump]'); if(viewJump){navigate(viewJump.dataset.viewJump);return;}
+    const person=e.target.closest('[data-person]'); if(person){openPerson(person.dataset.person);return;}
+    const teacher=e.target.closest('[data-teacher]'); if(teacher){openTeacher(teacher.dataset.teacher);return;}
+    const proj=e.target.closest('[data-project]'); if(proj){openProject(proj.dataset.project);return;}
+    if(e.target.closest('[data-close-modal]')){modalRoot.innerHTML='';return;}
+    if(e.target.closest('[data-open-assistant]')){assistantOpen();return;}
+    const exp=e.target.closest('[data-export]'); if(exp){const t=exp.dataset.export;exportXls(`DGA_UNT_${t}_${D.meta.referenceDate.replaceAll('/','-')}`,rowsForExport(t));return;}
+    const expM=e.target.closest('[data-export-module]'); if(expM){const k=expM.dataset.exportModule;exportXls(`DGA_UNT_${k}_tareas`,rowsForExport('module',k));return;}
+    const expP=e.target.closest('[data-export-person]'); if(expP){const p=D.people.find(x=>x.id===expP.dataset.exportPerson); if(p) exportXls(`Ficha_${p.id}_${p.name.replaceAll(' ','_')}`,p.tasks.map(t=>({Servidor:p.name,Área:p.area,Tarea:t[0],Avance:t[1]+'%',Estado:t[2],Plazo:t[3],GDR_demo:p.gdr,Régimen:p.regime}))); return;}
+    const dt=e.target.closest('[data-doc-template]'); if(dt){
+      const type=dt.dataset.docTemplate;
+      if(type==='gdr') downloadDoc('Formato_Seguimiento_GDR_Demo','FORMATO DE SEGUIMIENTO – GESTIÓN DEL RENDIMIENTO',`<p><b>Servidor:</b> _______________________________</p><p><b>Unidad/Área:</b> ____________________________</p><table><tr><th>Indicador / producto</th><th>Avance</th><th>Evidencia</th><th>Observaciones</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table><p>Es todo cuanto tengo que informar para los fines correspondientes.</p><p>Firma: _____________________</p>`);
+      if(type==='tasks') downloadDoc('Reporte_Pendientes_Demo','REPORTE DE PENDIENTES DEL SERVIDOR',`<p><b>Fecha:</b> ${D.meta.referenceDate}</p><table><tr><th>Tarea</th><th>Avance</th><th>Plazo</th><th>Observación</th></tr><tr><td>Actividad asignada</td><td>60%</td><td>__/__/2026</td><td>En curso</td></tr></table><p>Es todo cuanto tengo que informar para los fines correspondientes.</p>`);
+      if(type==='proveido') downloadDoc('Proveido_Demo','PROVEÍDO',`<p><b>Asunto:</b> Atención de documento administrativo</p><p>Pase a la unidad competente para su evaluación y atención conforme a sus atribuciones, debiendo informar el estado de lo actuado dentro del plazo correspondiente.</p><p>Trujillo, ${D.meta.referenceDate}</p>`);
+      return;
+    }
+  });
+
+  document.addEventListener('input', e=>{if(e.target.id==='peopleSearch') applyPeopleFilter(); if(e.target.id==='teacherSearch') applyTeacherFilter();});
+  document.addEventListener('change', e=>{
+    if(e.target.id==='peopleUnit') applyPeopleFilter();
+    if(e.target.id==='facultySelect'){state.faculty=e.target.value;applyTeacherFilter();}
+    if(e.target.matches('[data-upload-module]')){const f=e.target.files?.[0]; if(f) showToast(`Archivo “${f.name}” recibido en modo simulación.`);}
+  });
+
+  roleSelect.addEventListener('change',()=>{
+    state.role=roleSelect.value;
+    updateNavAccess();
+    const allowed=access[state.role];
+    if(state.view==='module' && !allowed.includes(state.module)) state.view='dashboard',state.module=null;
+    else if(state.view!=='module' && !allowed.includes(state.view)) state.view=state.role==='servidor'?'people':'dashboard';
+    render();
+  });
+
+  document.getElementById('assistantFab').addEventListener('click',assistantOpen);
+  document.getElementById('openAssistantTop').addEventListener('click',assistantOpen);
+  document.getElementById('closeAssistant').addEventListener('click',assistantClose);
+  document.querySelectorAll('.assistant-chip').forEach(btn=>btn.addEventListener('click',()=>{assistantInput.value=btn.dataset.prompt; document.getElementById('assistantForm').requestSubmit();}));
+  document.getElementById('assistantForm').addEventListener('submit',e=>{e.preventDefault();const q=assistantInput.value.trim();if(!q)return;addBubble(q,'user');assistantInput.value='';setTimeout(()=>addBubble(assistantReply(q),'ai'),180);});
+
+  document.addEventListener('click', e=>{
+    if(e.target.id==='generateDoc'){
+      const type=document.getElementById('docType').value, unit=document.getElementById('docUnit').value, owner=document.getElementById('docOwner').value, subj=document.getElementById('docSubject').value, body=document.getElementById('docBody').value;
+      downloadDoc(`${type.replaceAll(' ','_')}_Demo`,type.toUpperCase(),`<p><b>Unidad:</b> ${esc(D.modules[unit]?.name||unit)}</p><p><b>Responsable:</b> ${esc(owner)}</p><p><b>Asunto:</b> ${esc(subj)}</p><p>${esc(body).replaceAll('\n','<br>')}</p><p>Es todo cuanto tengo que informar para los fines correspondientes.</p><p>Trujillo, ${D.meta.referenceDate}</p>`);
+    }
+  });
+
+  addBubble('Bienvenido. Soy el asistente de la maqueta del Sistema Integrado DGA UNT. Puedo responder sobre la información ficticia del tablero y ayudarte a mostrar al Director cómo funcionaría la experiencia futura.','ai');
+  render();
+})();
+
+</script>
+</body>
+</html>
