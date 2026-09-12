@@ -3,103 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0f2e4e" />
-  <meta name="description" content="Maqueta funcional del Sistema Integrado de la Dirección General de Administración de la Universidad Nacional de Trujillo." />
-  <title>Sistema Integrado DGA UNT — Maqueta</title>
-  <link rel="icon" href="assets/dga-unt-mark.svg" />
+  <meta name="description" content="Maqueta funcional del Sistema Integrado de la Dirección General de Administración UNT" />
+  <title>Sistema Integrado de la Dirección General de Administración UNT</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar" aria-label="Navegación principal">
-      <div class="brand">
-        <img src="assets/dga-unt-mark.svg" alt="DGA UNT" />
+  <div id="appShell" class="app-shell">
+    <header class="topbar">
+      <button id="sidebarToggle" class="icon-btn mobile-only" aria-label="Abrir menú">☰</button>
+      <div class="brand" data-route="dashboard" role="button" tabindex="0" aria-label="Ir al inicio">
+        <div class="brand-mark official" aria-hidden="true"><img src="assets/unt-logo.png" alt=""></div>
         <div class="brand-copy">
-          <strong>Sistema Integrado<br>DGA UNT</strong>
-          <span>Maqueta funcional</span>
+          <div class="brand-university">Universidad Nacional de Trujillo</div>
+          <div class="brand-system">Sistema Integrado de la Dirección General de Administración</div>
         </div>
       </div>
-
-      <div class="nav-section">
-        <div class="nav-label">Dirección</div>
-        <button class="nav-btn active" data-view="dashboard"><i class="nav-dot"></i><span>Inicio ejecutivo</span></button>
-        <button class="nav-btn" data-view="org"><i class="nav-dot"></i><span>Estructura DGA</span></button>
-        <button class="nav-btn" data-view="projects"><i class="nav-dot"></i><span>Proyectos y Gantt</span></button>
+      <div class="top-actions">
+        <div class="demo-pill" title="Los datos operativos son simulados">● MAQUETA 2026</div>
+        <label class="role-picker">
+          <span>Vista</span>
+          <select id="roleSelect" aria-label="Cambiar perfil de simulación"></select>
+        </label>
+        <button id="assistantOpen" class="assistant-open">✦ Asistente DGA</button>
       </div>
+    </header>
 
-      <div class="nav-section">
-        <div class="nav-label">Unidades</div>
-        <button class="nav-btn" data-module="rh"><i class="nav-dot"></i><span>Recursos Humanos</span></button>
-        <button class="nav-btn" data-module="abastecimiento"><i class="nav-dot"></i><span>Abastecimiento</span></button>
-        <button class="nav-btn" data-module="tesoreria"><i class="nav-dot"></i><span>Tesorería</span></button>
-        <button class="nav-btn" data-module="contabilidad"><i class="nav-dot"></i><span>Contabilidad</span></button>
-        <button class="nav-btn" data-module="inversiones"><i class="nav-dot"></i><span>Unidad Ejecutora de Inversiones</span></button>
-        <button class="nav-btn" data-module="servicios"><i class="nav-dot"></i><span>Servicios Generales</span></button>
+    <aside id="sidebar" class="sidebar">
+      <nav id="mainNav" class="main-nav"></nav>
+      <div class="sidebar-bottom">
+        <button class="nav-item subtle" data-route="sources"><span>ⓘ</span><span>Fuentes y alcance</span></button>
+        <div class="palette-strip" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
-
-      <div class="nav-section">
-        <div class="nav-label">Gestión</div>
-        <button class="nav-btn" data-view="people"><i class="nav-dot"></i><span>Servidores y tareas</span></button>
-        <button class="nav-btn" data-view="academic"><i class="nav-dot"></i><span>Personal académico</span></button>
-        <button class="nav-btn" data-view="attendance"><i class="nav-dot"></i><span>Asistencia y permanencia</span></button>
-        <button class="nav-btn" data-view="norms"><i class="nav-dot"></i><span>Normativa vigente</span></button>
-        <button class="nav-btn" data-view="documents"><i class="nav-dot"></i><span>Documentos rápidos</span></button>
-        <button class="nav-btn" data-view="reports"><i class="nav-dot"></i><span>Reportes y Excel</span></button>
-      </div>
-      <div class="sidebar-footer">Demo para presentación institucional.<br>Los datos son ficticios.</div>
     </aside>
 
-    <main class="main">
-      <header class="topbar">
-        <div class="topbar-left">
-          <div class="topbar-title">Sistema Integrado de la Dirección General de Administración UNT</div>
-          <div class="demo-pill">● Datos simulados</div>
-        </div>
-        <div class="topbar-actions">
-          <select id="roleSelect" class="role-select" aria-label="Perfil de acceso simulado">
-            <option value="director">Director General de Administración</option>
-            <option value="rh">Jefatura de Recursos Humanos</option>
-            <option value="abastecimiento">Jefatura de Abastecimiento</option>
-            <option value="tesoreria">Jefatura de Tesorería</option>
-            <option value="contabilidad">Jefatura de Contabilidad</option>
-            <option value="inversiones">Jefatura UEI</option>
-            <option value="servicios">Jefatura de Servicios Generales</option>
-            <option value="servidor">Servidor / Mi trabajo</option>
-          </select>
-          <button class="icon-btn" id="openAssistantTop" title="Abrir asistente">IA</button>
-        </div>
-      </header>
-
-      <section id="appContent" class="content" aria-live="polite"></section>
-    </main>
+    <main id="mainContent" class="main-content" tabindex="-1"></main>
   </div>
 
-  <button class="assistant-fab" id="assistantFab" title="Asistente DGA">IA</button>
-
-  <aside class="assistant-drawer" id="assistantDrawer" aria-label="Asistente DGA">
+  <aside id="assistantDrawer" class="assistant-drawer" aria-hidden="true">
     <div class="assistant-head">
       <div>
-        <h3>Asistente DGA</h3>
-        <small>Modo demostración · respuestas sobre la data ficticia</small>
+        <div class="eyebrow">ASISTENTE INSTITUCIONAL · DEMO</div>
+        <h2>Asistente DGA</h2>
+        <p>Consulta tareas, asistencia, proyectos, patrimonio, tesorería, docentes o normativa de la maqueta.</p>
       </div>
-      <button class="icon-btn" id="closeAssistant" aria-label="Cerrar">×</button>
+      <button id="assistantClose" class="icon-btn" aria-label="Cerrar asistente">✕</button>
     </div>
-    <div class="assistant-body" id="assistantBody"></div>
-    <div class="assistant-chips">
-      <button class="assistant-chip" data-prompt="¿Qué proyectos están retrasados?">Proyectos retrasados</button>
-      <button class="assistant-chip" data-prompt="¿Quién llegó tarde hoy?">Tardanzas de hoy</button>
-      <button class="assistant-chip" data-prompt="¿Cuál es el saldo de tesorería?">Saldo de Tesorería</button>
-      <button class="assistant-chip" data-prompt="¿Qué alertas normativas hay?">Alertas normativas</button>
-      <button class="assistant-chip" data-prompt="¿Cómo va Gestión del Rendimiento?">GDR 2026</button>
-    </div>
-    <form class="assistant-form" id="assistantForm">
-      <input id="assistantInput" autocomplete="off" placeholder="Pregunta por tareas, personas, proyectos, saldos, normas..." />
-      <button type="submit">Enviar</button>
+    <div id="assistantQuick" class="assistant-quick"></div>
+    <div id="assistantMessages" class="assistant-messages" aria-live="polite"></div>
+    <form id="assistantForm" class="assistant-form">
+      <textarea id="assistantInput" rows="2" placeholder="Ej.: ¿Qué tareas tenía Víctor Avalos la semana pasada?"></textarea>
+      <button type="submit">Consultar</button>
     </form>
+    <div class="assistant-foot">Respuestas generadas sobre los datos de esta maqueta. No sustituye sistemas oficiales ni registros institucionales.</div>
   </aside>
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="modalRoot"></div>
-  <div class="toast" id="toast"></div>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
